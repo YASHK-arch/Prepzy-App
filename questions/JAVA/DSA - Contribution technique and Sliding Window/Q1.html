@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Minimum Swaps 2</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q1. Minimum Swaps 2</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Given an array of integers <strong>A</strong> of size <strong>N</strong> that is a permutation of <strong>[0, 1, 2, ..., (N-1)]</strong>.</p>
+    <p>It is allowed to <strong>swap any two elements</strong> (not necessarily consecutive).</p>
+    <p>Find the minimum number of swaps required to sort the array in <strong>ascending</strong> order.</p>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ N ≤ 100,000</p>
+      <p>0 ≤ A[i] < N</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <p>The only argument given is the integer array <strong>A</strong>.</p>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return the minimum number of swaps.
+    </div>
+
+    <h2>Example Input</h2>
+    <div class="code-box">
+      Input 1: A = [1, 2, 3, 4, 0] <br>
+      Input 2: A = [2, 0, 1, 3]
+    </div>
+
+    <h2>Example Output</h2>
+    <div class="code-box">
+      Output 1: 4 <br>
+      Output 2: 2
+    </div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      There are many ways to make the array sorted. One sequence of swaps is as follow: <br>
+      Initial array -> [1, 2, 3, 4, 0] <br>
+      Swapping (1, 2) becomes [2, 1, 3, 4, 0] <br>
+      Swapping (2, 3) becomes [3, 1, 2, 4, 0] <br>
+      Swapping (4, 0) becomes [3, 1, 2, 0, 4] <br>
+      Swapping (3, 0) becomes [0, 1, 2, 3, 4] <br>
+      Thus the array is sorted in <strong>4 swaps</strong>.
+    </div>
+    
+    <p>Explanation 2:</p>
+    <div class="code-box">
+      One sequence of swaps is as follow: <br>
+      Initial array -> [2, 0, 1, 3] <br>
+      Swapping (2, 0) becomes [0, 2, 1, 3] <br>
+      Swapping (1, 2) becomes [0, 1, 2, 3] <br>
+      Thus the array is sorted in <strong>2 swaps</strong>.
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class mi_swaps_toSort {
+
+    /*
+     * Minimum swaps to sort a permutation of [0..n-1].
+     *
+     * Key idea (cycle decomposition):
+     * - The array A is a permutation of 0..n-1, so each element belongs to exactly one cycle
+     * when you follow the mapping: index -> A[index] -> A[A[index]] -> ...
+     * - A cycle of length k can be fixed (sorted) with exactly (k - 1) swaps.
+     *
+     * Time: O(n) (each index visited once)
+     * Space: O(n) for visited array
+     */
+    public int solve(int[] A) {
+        int n = A.length;
+        boolean[] visited = new boolean[n];
+        int swaps = 0;
+
+        for (int i = 0; i < n; i++) {
+            if (visited[i] || A[i] == i) continue;
+
+            int cycleSize = 0;
+            int j = i;
+
+            while (!visited[j]) {
+                visited[j] = true; 
+                j = A[j];          
+                cycleSize++;
+            }
+
+            if (cycleSize > 0) {
+                swaps += (cycleSize - 1);
+            }
+        }
+
+        return swaps;
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q2.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+ <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

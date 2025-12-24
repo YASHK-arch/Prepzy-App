@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Design Add and Search Words Data Structure</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <!----------------------- PROBLEM ----------------------------------->
+    <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q3. Design Add and Search Words Data Structure</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Design a data structure that supports adding new words and searching for words with optional wildcard characters.</p>
+    
+    <p>Implement the following functions:</p>
+    <ul>
+      <li><strong>WordDictionary()</strong> — Initializes the object.</li>
+      <li><strong>void addWord(word)</strong> — Adds a <strong>word</strong> (containing lowercase English letters) to the structure.</li>
+      <li><strong>bool search(word)</strong> — Returns <strong>true</strong> if there is any word in the structure that matches word; word may contain dots '.', where each dot can represent <strong>any single letter</strong>.</li>
+    </ul>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ word.length ≤ 25</p>
+      <p>Words in addWord contain only lowercase English letters.</p>
+      <p>Words in search may contain lowercase letters and dots '.'.</p>
+      <p>There will be at most 2 dots in word for search queries.</p>
+      <p>At most 10⁴ calls will be made to addWord and search.</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <p>You need to complete the functions alone. Do not print anything.</p>
+    
+    <h3>For custom testing, the input will be given as:</h3>
+    <div class="code-box">
+      Q<br>
+      add &lt;word&gt;<br>
+      search &lt;pattern&gt;<br>
+      ...
+    </div>
+    <ul>
+      <li>The first line contains the number of function calls Q.</li>
+      <li>Each of the next Q lines represents one function call:
+        <ul>
+          <li>add &lt;word&gt; → Adds a word to the data structure.</li>
+          <li>search &lt;pattern&gt; → Returns true or false.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      For each search function call, return <strong>true</strong> if the word is found, otherwise <strong>false</strong>.
+    </div>
+
+    <h2>Example Input</h2>
+    <p>Input 1:</p>
+    <div class="code-box">
+      ["WordDictionary","addWord","addWord","addWord","search","search","search",
+      "search"]<br>
+      [[],["bad"],["dad"],["mad"],["pad"],["bad"],[".ad"],["b.."]]
+    </div>
+    <p>Input 2:</p>
+    <div class="code-box">
+      ["WordDictionary","addWord","addWord","search","search","search"]<br>
+      [[],["cat"],["car"],["cat"],["c.t"],["bat"]]
+    </div>
+
+    <h2>Example Output</h2>
+    <p>Output 1:</p>
+    <div class="code-box">[null,null,null,null,false,true,true,true]</div>
+    <p>Output 2:</p>
+    <div class="code-box">[null,null,null,true,true,false]</div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      WordDictionary wordDictionary = new WordDictionary();<br>
+      wordDictionary.addWord("bad");<br>
+      wordDictionary.addWord("dad");<br>
+      wordDictionary.addWord("mad");<br>
+      wordDictionary.search("pad"); // return False<br>
+      wordDictionary.search("bad"); // return True<br>
+      wordDictionary.search(".ad"); // return True<br>
+      wordDictionary.search("b.."); // return True
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+import java.util.ArrayList;
+
+class WordDictionary {
+    private ArrayList<String> dictionary;
+
+    public WordDictionary() {
+        dictionary = new ArrayList<>();
+    }
+
+    public void addWord(String word) {
+        dictionary.add(word);
+    }
+
+    public boolean search(String word) {
+
+        // Case 1: word has NO wildcard
+        if (!word.contains(".")) {
+            return dictionary.contains(word);
+        }
+
+        // Case 2: word HAS wildcard
+        for (String dictWord : dictionary) {
+
+            // length must match
+            if (dictWord.length() != word.length()) {
+                continue;
+            }
+
+            boolean match = true;
+
+            // match character-by-character
+            for (int i = 0; i < word.length(); i++) {
+                char wc = word.charAt(i);       // char in wildcard pattern
+                char dc = dictWord.charAt(i);   // char in dictionary word
+
+                if (wc != '.' && wc != dc) {
+                    match = false;
+                    break;
+                }
+            }
+
+            if (match) return true;
+        }
+
+        return false;
+    }
+}
+
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <button class="next">NEXT QUESTION ⏩</button>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+</body>
+
+</html>

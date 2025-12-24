@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Revision Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home" id="home">
+            <img src="logo.png" alt="Prepzy Logo" class="nav-logo" width="30px" height="30px" style="padding-right: 8px">
+            Prepzy
+        </a>
+        <div class="dropdown">
+            <button class="dropbtn">Subject 
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="subjects/java.html">DSA</a>
+                <a href="js.html">JS</a>
+                <a href="maths.html">Maths</a>
+            </div>
+        </div> 
+    </div>
+
+    <div class="container">
+        <header class="global-stats">
+            <div class="stat-card main-progress">
+                <h2>Global Progress: <span id="overall-percent">0%</span></h2>
+                <div class="progress-bar-bg">
+                    <div class="progress-bar-fill" style="width: 0%; background: #4CAF50;"></div>
+                </div>
+                <p>🔥 14-Day Revision Streak | 📅 Exam in 28 Days</p>
+            </div>
+        </header>
+
+        <main class="topic-grid">
+            <div class="topic-card" style="border-top: 5px solid #4CAF50;">
+                <div class="card-content">
+                    <h3>DSA</h3>
+                    <p class="count">Syncing...</p>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 0%; background: #4CAF50;"></div>
+                    </div>
+                    <span class="percentage-label">0%</span>
+                </div>
+                <div class="card-actions">
+                    <a href="subjects/java.html" style="text-decoration: none;">
+                        <button class="btn-primary">Continue Revision</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="topic-card" style="border-top: 5px solid #2196F3;">
+                <div class="card-content">
+                    <h3>Web Dev: Javascript</h3>
+                    <p class="count">Syncing...</p>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 0%; background: #2196F3;"></div>
+                    </div>
+                    <span class="percentage-label">0%</span>
+                </div>
+                <div class="card-actions">
+                    <a href="js.html" style="text-decoration: none;">
+                        <button class="under-development">Under Development</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="topic-card" style="border-top: 5px solid #FFC107;">
+                <div class="card-content">
+                    <h3>Mathematics</h3>
+                    <p class="count">Syncing...</p>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 0%; background: #FFC107;"></div>
+                    </div>
+                    <span class="percentage-label">0%</span>
+                </div>
+                <div class="card-actions">
+                    <a href="maths.html" style="text-decoration: none;">
+                        <button class="under-development">Under Development</button>
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <button class="btn-quiz">Unlock Milestone Quiz</button>
+        </footer>
+    </div>
+
+    <script src="js-integration/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>Shortest substring in A containing B</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q1. Window String</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Given a string <strong>A</strong> and a string <strong>B</strong>, find the window with minimum length in <strong>A</strong>, which will contain all the characters in <strong>B</strong> in linear time complexity.</p>
+    <p>Note that when the count of a character <strong>c</strong> in <strong>B</strong> is <strong>x</strong>, then the count of <strong>c</strong> in the minimum window in <strong>A</strong> should be at least <strong>x</strong>.</p>
+    
+    <p><strong>Note:</strong></p>
+    <ul>
+      <li>If there is no such window in <strong>A</strong> that covers all characters in <strong>B</strong>, return the empty string.</li>
+      <li>If there are multiple such windows, return the first occurring minimum window (with minimum start index and length).</li>
+    </ul>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ size(A), size(B) ≤ 10⁶</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <ul>
+      <li>The first argument is a string <strong>A</strong>.</li>
+      <li>The second argument is a string <strong>B</strong>.</li>
+    </ul>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return a string denoting the minimum window.
+    </div>
+
+    <h2>Example Input</h2>
+    <div class="code-box">
+      Input 1: <br>
+      A = "ADOBECODEBANC", B = "ABC" <br>
+      Input 2: <br>
+      A = "Aa91b", B = "ab"
+    </div>
+
+    <h2>Example Output</h2>
+    <div class="code-box">
+      Output 1: "BANC" <br>
+      Output 2: "a91b"
+    </div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      "BANC" is a substring of A which contains all characters of B.
+    </div>
+    
+    <p>Explanation 2:</p>
+    <div class="code-box">
+      "a91b" is the substring of A which contains all characters of B.
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class Solution {
+    public String minWindow(String A, String B) {
+        int[] need = new int[256];     // Required frequency from B
+        int[] have = new int[256];     // Current window frequency
+
+        for(char c: B.toCharArray()) need[c]++;    
+        int needed = B.length();                 
+        int matched = 0;                         
+
+        int left = 0;
+        int bestLen = Integer.MAX_VALUE;        
+        int bestStart = 0;                      
+
+        for (int right = 0; right < A.length(); right++) {
+            char rChar = A.charAt(right);
+            have[rChar]++;          
+            
+            if (have[rChar] <= need[rChar]) {
+                matched++;          
+            }
+        
+            // When all required characters are matched, try to shrink from left
+            while (matched == needed) {
+                int windowLen = right - left + 1;
+                if (windowLen < bestLen) {
+                    bestLen = windowLen; 
+                    bestStart = left;
+                }
+
+                char lChar = A.charAt(left);
+                have[lChar]--;
+
+                // If removing lChar breaks the match requirements
+                if (have[lChar] < need[lChar]) {
+                    matched--;
+                }
+                left ++;
+            }
+        }
+
+        if (bestLen == Integer.MAX_VALUE) {
+            return "";
+        } else {
+            return A.substring(bestStart, bestStart + bestLen);
+        }
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q2.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+ <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

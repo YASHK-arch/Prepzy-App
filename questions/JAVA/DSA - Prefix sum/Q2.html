@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Pick from both sides!</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q1. Pick from both sides!</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>You are given an integer array <strong>A</strong> of size <strong>N</strong>.</p>
+    <p>You have to perform <strong>B</strong> operations. In one operation, you can remove either the leftmost or the rightmost element of the array <strong>A</strong>.</p>
+    <p>Find and return the <strong>maximum possible sum</strong> of the <strong>B elements</strong> that were removed after the <strong>B</strong> operations.</p>
+    
+    <p><strong>NOTE:</strong> Suppose <strong>B = 3</strong>, and array A contains 10 elements, then you can:</p>
+    <ul>
+      <li>Remove 3 elements from front and 0 elements from the back, OR</li>
+      <li>Remove 2 elements from front and 1 element from the back, OR</li>
+      <li>Remove 1 element from front and 2 elements from the back, OR</li>
+      <li>Remove 0 elements from front and 3 elements from the back.</li>
+    </ul>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ N ≤ 10⁵</p>
+      <p>1 ≤ B ≤ N</p>
+      <p>-10³ ≤ A[i] ≤ 10³</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <ul>
+      <li>First argument is an integer array <strong>A</strong>.</li>
+      <li>Second argument is an integer <strong>B</strong>.</li>
+    </ul>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return an integer denoting the maximum possible sum of elements you removed.
+    </div>
+
+    <h2>Example Input</h2>
+    <p>Input 1:</p>
+    <div class="code-box">
+      A = [5, -2, 3, 1, 2]<br>
+      B = 3
+    </div>
+    <p>Input 2:</p>
+    <div class="code-box">
+      A = [2, 3, -1, 4, 2, 1]<br>
+      B = 4
+    </div>
+
+    <h2>Example Output</h2>
+    <p>Output 1:</p>
+    <div class="code-box">8</div>
+    <p>Output 2:</p>
+    <div class="code-box">9</div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      Remove element 5 from front and element (1, 2) from back so we get 5 + 1 + 2 = 8
+    </div>
+    <p>Explanation 2:</p>
+    <div class="code-box">
+      Remove the first element and the last 3 elements. So we get 2 + 4 + 2 + 1 = 9
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class  Pick_from_both_sides_H {
+
+    /* ============================================================
+       METHOD 1: PREFIX SUM USING YOUR SIR'S STYLE  (size = n)
+       prefix[0] = A[0]
+       prefix[i] = prefix[i-1] + A[i]
+       AND solve the problem using this prefix style
+       ============================================================ */
+
+    public int solveUsingSirPrefix(int[] A, int B) {
+        int n = A.length;
+
+        // Sir-style prefix sum: size n
+        int[] prefix = new int[n];
+        prefix[0] = A[0];
+        for (int i = 1; i < n; i++) {
+            prefix[i] = prefix[i - 1] + A[i];
+        }
+
+        // Reverse-prefix/suffix: also size n
+        int[] suffix = new int[n];
+        suffix[0] = A[n - 1];
+        for (int i = 1; i < n; i++) {
+            suffix[i] = suffix[i - 1] + A[n - 1 - i];
+        }
+
+        int maxSum = Integer.MIN_VALUE;
+
+        // Try all possibilities: x from front, B - x from back
+        for (int x = 0; x <= B; x++) {
+            int frontTake = x;
+            int backTake = B - x;
+
+            int sumFront = 0;
+            int sumBack = 0;
+
+            // Taking from front using prefix
+            if (frontTake > 0) {
+                sumFront = prefix[frontTake - 1];
+            }
+
+            // Taking from back using reverse prefix (suffix)
+            if (backTake > 0) {
+                sumBack = suffix[backTake - 1];
+            }
+
+            maxSum = Math.max(maxSum, sumFront + sumBack);
+        }
+
+        return maxSum;
+    }
+
+    /* ============================================================
+       METHOD 2: PREFIX SUM USING RECOMMENDED STYLE  (size = n+1)
+       prefix[0] = 0
+       prefix[i+1] = prefix[i] + A[i]
+       Easiest & safest (no out-of-bounds)
+       ============================================================ */
+
+    public int solveUsingRecommendedPrefix(int[] A, int B) {
+        int n = A.length;
+
+        // Safer prefix sum: size n+1
+        int[] prefix = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + A[i];
+        }
+
+        // Reverse prefix (suffix) also size n+1
+        int[] suffix = new int[n + 1];
+        for (int i = n - 1; i >= 0; i--) {
+            suffix[n - i] = suffix[n - i - 1] + A[i];
+        }
+
+        int maxSum = Integer.MIN_VALUE;
+
+        for (int x = 0; x <= B; x++) {
+            int sumFront = prefix[x];
+            int sumBack = suffix[B - x];
+
+            maxSum = Math.max(maxSum, sumFront + sumBack);
+        }
+
+        return maxSum;
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q3.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+  <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

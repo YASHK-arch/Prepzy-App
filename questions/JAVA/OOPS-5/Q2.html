@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>2. Design an ATM Machine</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q1. Design an ATM Machine</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>There is an ATM machine that stores banknotes of 5 denominations: <strong>20, 50, 100, 200, and 500</strong> dollars. Initially the ATM is empty. The user can use the machine to deposit or withdraw any amount of money.</p>
+    
+    <p>When withdrawing, the machine prioritizes using banknotes of <strong>larger</strong> values.</p>
+    <ul>
+      <li>For example, if you want to withdraw $300 and there are 2 $50 banknotes, 1 $100 banknote, and 1 $200 banknote, then the machine will use the $100 and $200 banknotes.</li>
+      <li>However, if you try to withdraw $600 and there are 3 $200 banknotes and 1 $500 banknote, then the withdraw request will be rejected because the machine will first try to use the $500 banknote and then be unable to use banknotes to complete the remaining $100.</li>
+    </ul>
+
+    <p>Implement the <strong>ATM</strong> class:</p>
+    <ul>
+      <li><strong>ATM()</strong> — Initializes the ATM object.</li>
+      <li><strong>void deposit(int[] banknotesCount)</strong> — Deposits new banknotes in the order $20, $50, $100, $200, and $500.</li>
+      <li><strong>int[] withdraw(int amount)</strong> — Returns an array of length 5 of the number of banknotes that will be handed to the user in the order $20, $50, $100, $200, and $500. Returns [-1] if it is not possible.</li>
+    </ul>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>banknotesCount.length == 5</p>
+      <p>0 ≤ banknotesCount[i] ≤ 10⁹</p>
+      <p>1 ≤ amount ≤ 10⁹</p>
+      <p>At most 5000 calls in total will be made to withdraw and deposit.</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <p>You only implement the class and methods above; the driver handles I/O.</p>
+    <div class="code-box">
+      Q<br>
+      op [args...]<br>
+      ...
+    </div>
+    <ul>
+      <li>deposit a b c d e (five non-negative ints for [20, 50, 100, 200, 500])</li>
+      <li>withdraw amount</li>
+    </ul>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      For every withdraw function call, return an array representing the number of banknotes used in the order [20, 50, 100, 200, 500]. If not possible, return [-1].
+    </div>
+
+    <h2>Example Input</h2>
+    <p>Input 1:</p>
+    <div class="code-box">
+      ["ATM", "deposit", "withdraw", "deposit", "withdraw", "withdraw"]<br>
+      [[], [[0,0,1,2,1]], [600], [[0,1,0,1,1]], [600], [550]]
+    </div>
+
+    <h2>Example Output</h2>
+    <p>Output 1:</p>
+    <div class="code-box">[null, null, [0,0,1,0,1], null, [-1], [0,1,0,0,1]]</div>
+
+    <h2>Example Explanation</h2>
+    <div class="code-box">
+      ATM atm = new ATM();<br>
+      atm.deposit([0,0,1,2,1]); // Deposits 1 $100, 2 $200, and 1 $500<br>
+      atm.withdraw(600); // Returns [0,0,1,0,1]. Uses 1 $100 and 1 $500<br>
+      atm.withdraw(600); // Returns [-1]. Cannot complete remaining $100 after using $500
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+class ATM {
+
+    // Stores count of banknotes for each denomination
+    long[] cnt;
+
+    // Available denominations (fixed order)
+    int[] denom = {20, 50, 100, 200, 500};
+
+    // Constructor: initialize banknote counts to zero
+    public ATM() {
+        cnt = new long[5];
+    }
+
+    // Deposit banknotes into the ATM
+    public void deposit(int[] banknotesCount) {
+        // Add each denomination count to ATM storage
+        for (int i = 0; i < 5; i++) {
+            cnt[i] += banknotesCount[i];
+        }
+    }
+
+    // Withdraw a given amount using a greedy approach
+    public int[] withdraw(int amount) {
+        // Stores how many notes of each denomination are used
+        int[] used = new int[5];
+
+        // Greedy algorithm:
+        // Start from largest denomination to minimize number of notes
+        for (int i = 4; i >= 0; i--) {
+            // Maximum notes we can take of this denomination
+            long take = Math.min(cnt[i], (long)amount / denom[i]);
+
+            used[i] = (int) take;
+            amount -= (int)(take * denom[i]);
+        }
+
+        // If exact amount cannot be formed, rollback
+        if (amount != 0) {
+            return new int[] { -1 };
+        }
+
+        // Deduct the used notes from ATM storage
+        for (int i = 0; i < 5; i++) {
+            cnt[i] -= used[i];
+        }
+
+        return used;
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+   <a href="Q1.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+  <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>
