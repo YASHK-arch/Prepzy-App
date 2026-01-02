@@ -422,16 +422,7 @@ You have:
 * ✔ Scalable structure
 * ✔ No unnecessary re-computation
 
-This is **production-grade frontend logic** for a no-backend app.
-
 ---
 
-If you want next, I can:
 
-* 📊 Draw a **visual flow diagram**
-* 🧠 Suggest **optimizations**
-* 🔧 Convert this into **React / Vue**
-* 🗃️ Add **export / analytics**
-
-Just tell me 👍
 
