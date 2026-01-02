@@ -3,7 +3,7 @@
  * Handles saving individual question progress using unique Topic + File keys.
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function(){  //ensures the DOM is loaded before querying buttons
     const doneBtn = document.querySelector('.done');
     const doneStatus = document.querySelector('.done-status');
     
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Example: /JAVA/Prefix%20sum/Q1.html -> ["JAVA", "Prefix sum", "Q1.html"]
     const pathParts = window.location.pathname.split("/");
     const fileName = pathParts.pop();             // e.g., "Q1.html"
-    const folderName = decodeURIComponent(pathParts.pop()); // e.g., "Prefix sum"
+    const folderName = decodeURIComponent(pathParts.pop()); // e.g., "Prefix sum"  decode URI converts %20 to " "
     
     // The unique key prevents conflicts between different topics
     const storageKey = `status_${folderName}_${fileName}`; 
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3. Save progress when 'Done' is clicked
     if (doneBtn) {
-        doneBtn.addEventListener('click', () => {
+        doneBtn.addEventListener('click', function(){
             localStorage.setItem(storageKey, 'completed');
             
             if (doneStatus) doneStatus.style.display = 'block';

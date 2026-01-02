@@ -18,7 +18,7 @@ function updateGlobalDashboard() {
         { 
             id: "js", 
             name: 'Web Dev: Javascript', 
-            folders: ['JS'] 
+            folders: ['Event propagation', 'Kanban Task Manager'] 
         },
         { 
             id: "maths", 
@@ -79,8 +79,13 @@ function updateGlobalDashboard() {
     });
 
     // --- 4. UPDATE GLOBAL (VIOLET) PROGRESS BAR ---
-    const globalPercent = grandTotalQuestions > 0 ? Math.round((grandTotalCompleted / grandTotalQuestions) * 100) : 0;
-    
+    let globalPercent = 0;
+   if (grandTotalQuestions > 0) {
+      globalPercent = Math.round(
+    (grandTotalCompleted / grandTotalQuestions) * 100
+  );
+}
+
     // Update text percentage
     const globalPercentDisplay = document.getElementById('overall-percent');
     if (globalPercentDisplay) globalPercentDisplay.innerText = `${globalPercent}%`;

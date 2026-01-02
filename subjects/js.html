@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DSA Revision Topics</title>
-    <link rel="stylesheet" href="styles/topics.css">
+    <link rel="stylesheet" href="../styles/topics.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="navbar">
-        <a href="#home" id="home">
-            <img src="logo.png" alt="Prepzy Logo" class="nav-logo" width="30px" height="30px" style="padding-right: 8px">
-            Prepzy
-        </a>
-        <div class="dropdown">
-            <button class="dropbtn">Subject <i class="fa fa-caret-down"></i></button>
-            <div class="dropdown-content">
-                <a href="java.html">DSA</a>
-                <a href="#">JS</a>
-                <a href="#">Maths</a>
-            </div>
-        </div> 
+  <!-- NAVBAR -->
+  <div class="navbar">
+  <a href="../index.html" id="home">
+    <img src="../logo.png" alt="Prepzy Logo" class="nav-logo" width="30px" height="30px" style="padding-right: 8px">
+       Prepzy
+  </a>
+  <div class="dropdown">
+    <button class="dropbtn">Subject 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="java.html">DSA</a>
+      <a href="js.html">JS</a>
+      <a href="#">Maths</a>
     </div>
+  </div> 
+</div>
 
     <div class="page-wrapper">
         <header class="main-header">
@@ -29,10 +32,11 @@
                 <i class="fa-solid fa-book-bookmark"></i>
                 <h1>DSA Revision Progress Tracker</h1>
             </div>
+            
             <div class="overall-container">
                 <div class="stats-text">
                     <span>Overall Progress: 2 completed out of 8 topics</span>
-                    <span>25%</span>
+                    <span>2 of 8 completed (25%)</span>
                 </div>
                 <div class="progress-bg">
                     <div class="progress-fill" style="width: 25%;"></div>
@@ -41,43 +45,66 @@
         </header>
 
         <section class="topic-list">
-            <div class="topic-group">
-                <div class="topic-item">
-                    <div class="topic-name">
-                        <i class="fa-solid fa-folder"></i>
-                        <span>DSA - Prefix sum</span>
-                    </div>
-                    <div class="topic-meta">
-                        <div class="item-bar-bg"><div class="item-bar-fill" style="width: 20%;"></div></div>
-                        <span class="percentage">1 of 5 completed (20%)</span>
-                    </div>
-                    <button class="view-btn">View</button>
+
+        <div class="topic-group">
+            <div class="topic-item">
+                <div class="topic-name">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>OOPS - 5</span>
                 </div>
-                
-                <div class="sub-menu">
-                    <div class="question-item">
-                        <i class="fa-brands fa-java"></i>
-                        <span class="q-name">count_of_evennumber_inrange_C</span>
-                        <span class="q-date">01-12-2025</span>
-                        <span class="q-size">1 KB</span>
-                    </div>
-                    <div class="question-item">
-                        <i class="fa-brands fa-java"></i>
-                        <span class="q-name">Pick_from_both_sides_H</span>
-                        <span class="q-date">16-12-2025</span>
-                        <span class="q-size">3 KB</span>
-                    </div>
-                    <div class="question-item">
-                        <i class="fa-brands fa-java"></i>
-                        <span class="q-name">Prefix_sum_C</span>
-                        <span class="q-date">01-12-2025</span>
-                        <span class="q-size">1 KB</span>
-                    </div>
+                <div class="topic-meta">
+                    <div class="item-bar-bg"><div class="item-bar-fill" style="width: 40%;"></div></div>
+                    <span class="percentage">2 of 5 completed (40%)</span>
                 </div>
+                <button class="view-btn">View</button>
             </div>
 
-            </section>
+
+            <div class="sub-menu">
+                     <div class="question-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="q-name">Kanban Task Manager</span>
+                        <span class="q-date">01-12-2025</span>
+                        <span class="q-open"><a href = "../questions/JS/Kanban Task Manager/NOTES.html"><button class ='open'>OPEN</button></a></span>
+                    </div>
+                    <div class="question-item">
+                        <i class="fa-brands fa-java"></i>
+                        <span class="q-name">Design Add and Search Words Data Structure</span>
+                        <span class="q-date">01-12-2025</span>
+                        <span class="q-open"><a href = "../questions/JS/Kanban Task Manager/Q1.html"><button class ='open'>OPEN</button></a></span>
+                    </div>
+                    
+            </div>
+        </div>
+
+         <div class="topic-group">
+            <div class="topic-item">
+                <div class="topic-name">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>Event Propagation</span>
+                </div>
+                <div class="topic-meta">
+                    <div class="item-bar-bg"><div class="item-bar-fill" style="width: 0%;"></div></div>
+                    <span class="percentage">0 of 4 completed (0%)</span>
+                </div>
+                <button class="view-btn">View</button>
+            </div>
+
+              <div class="sub-menu">
+                     <div class="question-item">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span class="q-name">NOTES</span>
+                        <span class="q-date">01-12-2025</span>
+                        <span class="q-open"><a href = ""><button class ='open'>OPEN</button></a></span>
+                    </div>                   
+            </div>
+         </div>
+
+         
+        </section>
     </div>
 
+  <script src="../js-integration/topic.js"></script>
+  <script src="../js-integration/data.js"></script>
 </body>
 </html>

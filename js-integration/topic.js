@@ -1,3 +1,5 @@
+//create a sub-topic question list of each topic as somewhat like a dropdown but working through a js mechanism
+
 const viewButtons = document.querySelectorAll('.view-btn');
 let AllTopicGrps = document.querySelectorAll('.topic-group');
             AllTopicGrps.forEach(function(grp){

@@ -19,6 +19,7 @@ body {
     url("https://img.freepik.com/premium-vector/vector-white-food-background1_733406-3096.jpg");
  
   background-position: center;
+  overflow-y:hidden;
 }
 
 .container {

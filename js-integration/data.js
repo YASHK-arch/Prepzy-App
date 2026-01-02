@@ -4,7 +4,7 @@
  * Reports total counts to the main dashboard.
  */
 
-window.addEventListener('load', () => {
+window.addEventListener('load', function() {
     updateDynamicProgress();
 });
 
@@ -28,14 +28,14 @@ function updateDynamicProgress() {
     let totalQuestionsCount = 0;
     let totalCompletedCount = 0;
 
-    topicGroups.forEach(group => {
+    topicGroups.forEach(function(group){
         const questionsInGroup = group.querySelectorAll('.question-item');
         if (questionsInGroup.length === 0) return;
 
         let groupCompleted = 0;
         let groupTotal = questionsInGroup.length;
 
-        questionsInGroup.forEach(q => {
+        questionsInGroup.forEach(function(q){
             const link = q.querySelector('a');
             if (link) {
                 const hrefPath = link.getAttribute('href');
