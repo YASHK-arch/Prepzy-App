@@ -1,0 +1,46 @@
+Dashboard
+ ├── Topic List (Lectures)
+ │     ├── Topic Progress Bar
+ │     └── Completion %
+ │
+ ├── Topic Detail View
+ │     ├── Notes PDF Viewer
+ │     ├── Marked Questions List
+ │     │     ├── Problem Image
+ │     │     ├── Code File Reference
+ │     │     ├── Revision Count
+ │     │     └── Status Toggle
+ │
+ ├── Local Storage Engine
+ │
+ └── Milestone Quiz System
+       ├── Timer
+       ├── Auto Evaluation
+       └── Readiness Score
+
+
+FOLDER STRUCTURE:
+/revision-app
+│
+├── index.html          → Dashboard
+├── topic.html          → Topic detail view
+├── quiz.html           → Milestone quiz
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   ├── data.js         → Topics & questions metadata
+│   ├── dashboard.js   → Dashboard logic
+│   ├── topic.js       → Topic interaction logic
+│   ├── storage.js     → LocalStorage manager
+│   └── quiz.js        → Quiz logic
+│
+├── assets/
+│   ├── notes/
+│   │    └── prefix_sum.pdf
+│   ├── questions/
+│   │    └── prefix_sum_q1.png
+│   └── icons/
+│
+└── README.md

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Maximum Sum Square SubMatrix</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q2. Maximum Sum Square SubMatrix</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Given a 2D integer matrix <strong>A</strong> of size <strong>N x N</strong>, find a <strong>B x B</strong> submatrix where <strong>B <= N</strong> and <strong>B >= 1</strong>, such that the <strong>sum of all the elements in the submatrix is maximum</strong>.</p>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ N ≤ 10³</p>
+      <p>1 ≤ B ≤ N</p>
+      <p>-10² ≤ A[i][j] ≤ 10²</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <ul>
+      <li>First argument is an 2D integer matrix <strong>A</strong>.</li>
+      <li>Second argument is an integer <strong>B</strong>.</li>
+    </ul>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return a single integer denoting the maximum sum of submatrix of size <strong>B x B</strong>.
+    </div>
+
+    <h2>Example Input</h2>
+    <div class="code-box">
+      Input 1: <br>
+      A = [ [1, 1, 1, 1, 1], <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2, 2, 2, 2, 2], <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[3, 8, 6, 7, 3], <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4, 4, 4, 4, 4], <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[5, 5, 5, 5, 5] ] <br>
+      B = 3 <br>
+      Input 2: <br>
+      A = [ [2, 2], <br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[2, 2] ] <br>
+      B = 2
+    </div>
+
+    <h2>Example Output</h2>
+    <div class="code-box">
+      Output 1: 48 <br>
+      Output 2: 8
+    </div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      Maximum sum 3 x 3 matrix is: <br>
+      8 6 7 <br>
+      4 4 4 <br>
+      5 5 5 <br>
+      Sum = 48
+    </div>
+    
+    <p>Explanation 2:</p>
+    <div class="code-box">
+      Maximum sum 2 x 2 matrix is: <br>
+      2 2 <br>
+      2 2 <br>
+      Sum = 8
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class Solution {
+    public int solve(int[][] A, int B) {
+        int n = A.length;
+        // Step 1: Create a 2D Prefix Sum array (size n+1 for easier calculation)
+        int [][] prefix = new int [n + 1][n + 1];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                // Build 2D prefix sum using Inclusion-Exclusion Principle
+                prefix[i+1][j+1] = prefix[i][j+1] + prefix[i+1][j] - prefix[i][j] + A[i][j];
+            }
+        }
+        
+        int sum = Integer.MIN_VALUE;
+        // Step 2: Iterate through all possible BxB submatrices
+        for(int i = 0; i <= n-B; i++){
+           for(int j = 0; j <= n-B; j++){
+               int r1 = i;
+               int c1 = j;
+               int r2 = i+B;
+               int c2 = j+B;
+
+                // Calculate sum of submatrix (r1,c1) to (r2-1, c2-1) in O(1)
+                int currentSum = prefix[r2][c2] - prefix[r1][c2] - prefix[r2][c1] + prefix[r1][c1];
+
+                sum = Math.max(sum, currentSum);
+           }
+       }
+       return sum;
+    }
+}
+
+
+
+
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q1.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+ <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

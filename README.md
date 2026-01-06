@@ -1,2 +1,1 @@
-# Prepzy-App
-Prepzy Revison App
+Prepzy's README

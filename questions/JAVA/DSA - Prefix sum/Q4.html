@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Special Index</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q2. Special Index</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Given an array, <strong>arr[]</strong> of size <strong>N</strong>, the task is to find the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.</p>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ N ≤ 10⁵</p>
+      <p>-10⁵ ≤ A[i] ≤ 10⁵</p>
+      <p>Sum of all elements of A ≤ 10⁹</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <p>First argument contains an array <strong>A</strong> of integers of size <strong>N</strong>.</p>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return the count of array indices such that removing an element from these indices makes the sum of even-indexed and odd-indexed array elements equal.
+    </div>
+
+    <h2>Example Input</h2>
+    <p>Input 1:</p>
+    <div class="code-box">
+      A = [2, 1, 6, 4]
+    </div>
+    <p>Input 2:</p>
+    <div class="code-box">
+      A = [1, 1, 1]
+    </div>
+
+    <h2>Example Output</h2>
+    <p>Output 1:</p>
+    <div class="code-box">1</div>
+    <p>Output 2:</p>
+    <div class="code-box">3</div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">
+      Removing arr[1] from the array modifies arr[] to { 2, 6, 4 } such that, arr[0] + arr[2] = arr[1]. Therefore, the required output is 1.
+    </div>
+    <p>Explanation 2:</p>
+    <div class="code-box">
+      Removing arr[0] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1].<br>
+      Removing arr[1] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1].<br>
+      Removing arr[2] from the given array modifies arr[] to { 1, 1 } such that arr[0] = arr[1].<br>
+      Therefore, the required output is 3.
+    </div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class Special_Index_C {
+    public int solve(int[] A) {
+        int n = A.length;
+
+        int[] PE = new int[n + 1];   // PE[i] = sum of even-indexed elements from A[0] to A[i-1]
+        int[] PO = new int[n + 1];   // PO[i] = sum of odd-indexed elements from A[0] to A[i-1]
+
+        for (int i = 0; i < n; i++) {
+            if ((i % 2) == 0) {  
+                // even index → add to PE
+                PE[i + 1] = PE[i] + A[i];
+                PO[i + 1] = PO[i];
+            } 
+            else {              
+                // odd index → add to PO
+                PO[i + 1] = PO[i] + A[i];
+                PE[i + 1] = PE[i];
+            }
+        }
+
+        int count = 0;
+
+        for (int i = 0; i < n; i++) {
+            // Sum of even and odd indices after removal logic
+            int S_even = PE[i] + (PO[n] - PO[i + 1]);
+            int S_odd  = PO[i] + (PE[n] - PE[i + 1]);
+
+            if (S_even == S_odd) {
+                count++;
+            }
+        }
+        return count;
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q1.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\data.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+  <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

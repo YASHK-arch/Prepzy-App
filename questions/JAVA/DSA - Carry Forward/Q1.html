@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution</title>
+    <link href = "../../../styles/solution.css" rel = "stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Edu+NSW+ACT+Cursive:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Press+Start+2P&family=Saira:ital,wght@0,100;1,100&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h4>1. Closest MinMax</h4>
+  </header>
+
+<div class="container">
+    <div class="problem">
+      <div class="problem-top-nav">
+    <div class="top-nav-left">
+      <h3>Q1. Closest MinMax</h3>
+      <span class="symbol">&lt;/&gt;</span>
+      <span class="badge-solved"><i class="fa-solid fa-circle-check"></i> Solved</span>
+    </div>
+    <i class="fa-solid fa-bookmark bookmark-icon"></i>
+  </div>
+
+  <div class="problem-body">
+    <h2>Problem Description</h2>
+    <p>Given an array <strong>A</strong>, find the size of the smallest subarray such that it contains at least one occurrence of the <strong>maximum value</strong> of the array and at least one occurrence of the <strong>minimum value</strong> of the array.</p>
+
+    <h2>Problem Constraints</h2>
+    <div class="gray-box">
+      <p>1 ≤ |A| ≤ 2000</p>
+    </div>
+
+    <h2>Input Format</h2>
+    <p>First and only argument is vector <strong>A</strong>.</p>
+
+    <h2>Output Format</h2>
+    <div class="gray-box">
+      Return the length of the smallest subarray which has at least one occurrence of minimum and maximum element of the array.
+    </div>
+
+    <h2>Example Input</h2>
+    <div class="code-box">
+      Input 1: A = [1, 3, 2] <br>
+      Input 2: A = [2, 6, 1, 6, 9]
+    </div>
+
+    <h2>Example Output</h2>
+    <div class="code-box">
+      Output 1: 2 <br>
+      Output 2: 3
+    </div>
+
+    <h2>Example Explanation</h2>
+    <p>Explanation 1:</p>
+    <div class="code-box">Take the 1st and 2nd elements as they are the minimum and maximum elements respectively.</div>
+    
+    <p>Explanation 2:</p>
+    <div class="code-box">Take the last 3 elements of the array.</div>
+  </div>
+</div>
+
+<div class="solution">
+        <pre>
+            <code class ="language-java">
+public class ClosestMinMax {
+    public int solve(int[] A) {
+        int n = A.length;
+        int min_size = Integer.MAX_VALUE;
+
+        // Find global min and max in the array
+        int min_val = Integer.MAX_VALUE;
+        int max_val = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+           min_val = Math.min(min_val, A[i]);
+           max_val = Math.max(max_val, A[i]);
+        }
+       
+        // O(N^2) approach to find the smallest subarray containing both
+        for (int start = 0; start < n; start++) {
+               int foundMin = 0;
+               int foundMax = 0;
+
+            for (int end = start; end < n; end++) {
+                if (A[end] == min_val) {
+                    foundMin++;
+                }
+                if (A[end] == max_val) {
+                    foundMax++;
+                }
+                if (foundMin > 0 && foundMax > 0) {
+                   int size = end - start + 1;
+                   min_size = Math.min(min_size, size);
+                   break; // Optimization: current start cannot yield a smaller subarray than this
+                }
+            }
+        }
+        return min_size;
+    }
+}
+            </code>
+        </pre>
+    </div>
+  </div>
+
+  <footer>
+    <a href ="Q2.html"><button class="next">NEXT QUESTION ⏩</button></a>
+    <button class="done">DONE ✅</button>
+    <div class ="done-status">Revision Completed !!</div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script src = "js-integration\questions.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+ <script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

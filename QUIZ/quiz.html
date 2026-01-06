@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Time Based Quiz</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/agate.min.css">
+</head>
+<body>
+
+<div class="quiz-container">
+    <h2 id="question">Question Text</h2>
+
+    <div class="code">
+        <pre><code class="language-java" id="codeBlock">
+            code here ....
+        </code></pre>
+    </div>
+
+    <div class="timer">
+        Time Left: <span id="time">15</span>s
+    </div>
+
+    <div id="options" class="options"></div>
+
+    <div class="progress">
+        Question <span id="current">1</span> /
+        <span id="total">5</span>
+    </div>
+
+    <button id="nextBtn" disabled>Next</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="script.js"></script>
+
+<script>
+    hljs.highlightAll();
+</script>
+
+</body>
+</html>
