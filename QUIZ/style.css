@@ -15,6 +15,8 @@ body {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    margin-bottom:30px;
+    margin-top: 30px;
 }
 
 .timer {
@@ -73,4 +75,5 @@ body {
     max-height: 200px;
     overflow: auto;
     margin-bottom: 10px;
+    
 }

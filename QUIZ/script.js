@@ -1,44 +1,104 @@
 var questions = [
     {
         question: "What will be the output of this code?",
-        code: `int[] arr = {5, 4, 3, 2, 1};
-for (int i = 1; i < arr.length; i++) {
-    int key = arr[i];
-    int j = i - 1;
-    while (j >= 0 && arr[j] > key) {
-        arr[j + 1] = arr[j];
-        j--;
+        code: `class Account {
+    private double balance = 5000;
+
+    void withdraw(double amount) {
+        if (amount <= balance)
+            balance -= amount;
     }
-    arr[j + 1] = key;
+
+    void showBalance() {
+        System.out.println(balance);
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Account a = new Account();
+        a.balance = 10000; // line X
+        a.withdraw(2000);
+        a.showBalance();
+    }
 }`,
-        options: ["1 2 3 4 5", "5 4 3 2 1", "Runtime Error", "No Output"],
-        answer: 0
-    },
-    {
-        question: "Which language is used for styling web pages?",
-        code: `body {
-    background-color: red;
-}`,
-        options: ["HTML", "JQuery", "CSS", "XML"],
+        options: ["3000", "5000", "Compilation Error at line X", "10000"],
         answer: 2
     },
     {
-        question: "Which is not a JavaScript framework?",
-        code: "",
-        options: ["React", "Angular", "Vue", "Django"],
+        question: "What is the output of the following code?",
+        code: 
+`class GuessTheOuput
+{
+    GuessTheOuput()
+    { System.out.print("Inside Constructor. "); }
+
+    { System.out.print("Inside the instance block. "); }
+
+    static
+    { System.out.print("Inside the static block. "); }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        GuessTheOuput obj = new GuessTheOuput();
+    }
+}
+`,
+        options: ["Inside Constructor. Inside the instance block. Inside the static block.", "Inside the instance block. Inside Constructor. Inside the static block.", "Inside the static block. Inside Constructor. Inside the instance block.", "Inside the static block. Inside the instance block. Inside Constructor."],
         answer: 3
     },
     {
-        question: "Inside which HTML element do we put JS?",
+        question: `What is true about static methods?
+
+i. They can be overloaded
+ii. They can be overridden
+
+Which of the following is correct?`,
         code: "",
-        options: ["<js>", "<script>", "<javascript>", "<code>"],
+        options: ["Both are correct", "Both are incorrect", "i is correct, ii is incorrect", "i is incorrect, ii is correct"],
+        answer: 2
+    },
+    {
+        question: "What will be the output of this code?",
+        code: `class Student {
+    private int marks = 85;
+
+    public int getMarks() {
+        return marks;
+    }
+
+    public void setMarks(int marks) {
+        if (marks > 0 && marks <= 100)
+            this.marks = marks;
+    }
+}
+
+class Test {
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setMarks(105);
+        System.out.println(s.getMarks());
+    }
+}`,
+        options: ["105", "85", "Compilation Error", "0"],
         answer: 1
     },
     {
-        question: "Which keyword declares a variable in JS?",
-        code: "",
-        options: ["var", "int", "string", "float"],
-        answer: 0
+        question: "What will be the output of following code snippet?",
+        code: `import java.util.*;
+public class Test {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(1, 5);
+        list.remove(Integer.valueOf(1));
+        System.out.println(list);
+    }
+}`,
+        options: ["[1,5]", "[2,5]", "[5,2]", "[1,2]"],
+        answer: 2
     }
 ];
 
@@ -74,17 +134,20 @@ function loadQuestion() {
     questionEl.innerText = q.question;
     currentEl.innerText = index + 1;
 
-    if (q.code && q.code.trim() !== "") {
-        codeBox.style.display = "block";
-        codeBlock.textContent = q.code;
+  if (q.code && q.code.trim() !== "") {
+    codeBox.style.display = "block";
+    codeBlock.textContent = q.code;
 
-        if (!codeBlock.classList.contains("hljs")) {
-            hljs.highlightElement(codeBlock);
-        }
-    } else {
-        codeBox.style.display = "none";
-        codeBlock.textContent = "";
-    }
+    codeBlock.removeAttribute("data-highlighted");
+    codeBlock.className = "language-java";
+
+    hljs.highlightElement(codeBlock);
+} else {
+    codeBox.style.display = "none";
+    codeBlock.textContent = "";
+}
+
+
 
     for (var i = 0; i < q.options.length; i++) {
         var btn = document.createElement("button");
