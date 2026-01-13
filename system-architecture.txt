@@ -1,46 +1,66 @@
-Dashboard
- ├── Topic List (Lectures)
- │     ├── Topic Progress Bar
- │     └── Completion %
- │
- ├── Topic Detail View
- │     ├── Notes PDF Viewer
- │     ├── Marked Questions List
- │     │     ├── Problem Image
- │     │     ├── Code File Reference
- │     │     ├── Revision Count
- │     │     └── Status Toggle
- │
- ├── Local Storage Engine
- │
- └── Milestone Quiz System
-       ├── Timer
-       ├── Auto Evaluation
-       └── Readiness Score
-
-
-FOLDER STRUCTURE:
-/revision-app
-│
-├── index.html          → Dashboard
-├── topic.html          → Topic detail view
-├── quiz.html           → Milestone quiz
-│
-├── css/
-│   └── style.css
-│
-├── js/
-│   ├── data.js         → Topics & questions metadata
-│   ├── dashboard.js   → Dashboard logic
-│   ├── topic.js       → Topic interaction logic
-│   ├── storage.js     → LocalStorage manager
-│   └── quiz.js        → Quiz logic
-│
-├── assets/
-│   ├── notes/
-│   │    └── prefix_sum.pdf
-│   ├── questions/
-│   │    └── prefix_sum_q1.png
-│   └── icons/
-│
-└── README.md
+┌──────────────────────────────────────────┐
+│              index.html                  │
+│           (Main Dashboard)               │
+│                                          │
+│  - Show global progress                  │
+│  - Cards to navigate to different pages  │
+└──────────────────────────────────────────┘
+                    │
+                    │ Subjects
+                    ▼
+    ┌───────────────────────────────────────────────┐
+    │                                               │
+    │   java.html     js.html     maths.html         │
+    │                                               │
+    │   (Subject Pages)                             │
+    │                                               │
+    │   - Contain topic-wise && whole subject       |
+    |      progress bars.                           |
+    │                                               |
+    │   - Progress bars update when questions /     │
+    │     revisions are marked as done              │
+    │                                               │
+    │   Uses:                                      │
+    │     • topic.js                               │
+    │     • data.js                                │
+    │     • quiz-unlocked.js                       │
+    └───────────────────────────────────────────────┘
+                    │
+                    │ Topics
+                    ▼
+    ┌───────────────────────────────────────────────┐
+    │ Topic 1                                       │
+    │   ├─ Notes                                   │
+    │   ├─ Q1                                     │
+    │   └─ Q2                                     │
+    │                                               │
+    │ Topic 2                                       │
+    │   ├─ Notes                                   │
+    │   ├─ Q1                                     │
+    │   └─ Q2                                     │
+    │                                               │
+    │ Topic 3                                       │
+    │   ├─ Notes                                   │
+    │   ├─ Q1                                     │
+    │   ├─ Q2                                     │
+    │   └─ Q3                                     │
+    │                                               │
+    │ Uses:                                        │
+    │   • question.js                              │
+    │   • storage.js                               │
+    └───────────────────────────────────────────────┘
+                    │
+                    │ When dashboard progress
+                    │ becomes ≥ 60%
+                    ▼
+        ┌──────────────────────────────────┐
+        │          Unlock Quiz             │
+        │                                  │
+        │ - Gets highlighted in            │
+        │   subject page                   │
+        └──────────────────────────────────┘
+                    │
+                    ▼
+        ┌──────────────────────────────────┐
+        │  Activate desktop notification   │
+        └──────────────────────────────────┘
