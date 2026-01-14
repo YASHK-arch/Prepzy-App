@@ -1,5 +1,8 @@
 let milestoneToast = null;
 
+// ===============================
+// TOAST UI
+// ===============================
 function showToast(message, type = "info") {
     const container = document.getElementById("toast-container");
     if (!container || milestoneToast) return;
@@ -28,6 +31,9 @@ function removeToast() {
     }
 }
 
+// ===============================
+// DASHBOARD DSA PROGRESS WATCHER
+// ===============================
 (function watchDSAProgress() {
 
     const interval = setInterval(() => {
@@ -41,12 +47,15 @@ function removeToast() {
         const percent = parseInt(percentLabel.innerText);
         console.log("DSA Progress:", percent);
 
+        // ✅ Show toast when >= 60
         if (!isNaN(percent) && percent >= 60) {
             showToast("🎉 DSA Milestone Quiz Unlocked!", "success");
-        } else {
+        }
+        // ❌ Remove toast when < 60
+        else {
             removeToast();
         }
 
-    }, 300);
+    }, 300); // keep watching
 
 })();

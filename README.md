@@ -40,12 +40,17 @@ The project makes extensive use of core DOM concepts, including:
 
 - `DOMContentLoaded` and `window.onload`
 - `document.querySelector()` and `querySelectorAll()`
-- Dynamic element creation and manipulation
 - Event handling using `addEventListener()`
-- Conditional rendering of UI components
+- `Conditional rendering` of UI components
 - Progress bar updates using inline styles
 - Reading and writing persistent data using `localStorage`
 - Cross-page DOM synchronization using shared keys
+
+**For Quiz Section && the Unlocking Mechanism**
+- `IIFE (Self-Executing Functions)` - Functions that run immediately when the script loads.
+-  Dynamic element creation and manipulation
+- `Timers` and `Asynchronous DOM Updates`  (like `setInterval()` & `clearInterval()`)
+- `MutationObserver` (Advanced Concept learnt partially)
 
 ---
 
@@ -71,6 +76,21 @@ This design ensures:
 
 ---
 
+### 📌 **Quiz Unlocking Mechanism** (Updates UI in subject pages and dashboard)
+<table align="center">
+  <tr>
+    <td align="center" width="50%">
+      <img src="quiz-unlocking-mechanism.png" width="90%">
+      <br>
+      <b>Quiz Unlocking Flow</b>
+    </td>
+    <td align="center" width="50%">
+      <img src="toast-logic.png" width="90%">
+      <br>
+      <b>Toast Overlay Logic</b>
+    </td>
+  </tr>
+</table>
 
 
 ---

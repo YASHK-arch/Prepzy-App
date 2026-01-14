@@ -1,3 +1,4 @@
+
 const totalProgress = document.querySelector('.progress-fill');
 
 const milestoneCont1 = document.querySelector('#gift1');
@@ -9,20 +10,34 @@ const quizLink1 = document.querySelector('#quix1');
 
 let isUnlocked = false;
 
+// ===============================
+// LOCK / UNLOCK HANDLERS
+// ===============================
 function lockMilestone() {
     isUnlocked = false;
+
+    // Show alert only when locked
     milestoneCont1.onclick = showAlert;
+
+    // Disable navigation
     quizLink1.href = "javascript:void(0)";
     quizLink1.style.pointerEvents = "none";
 }
 
 function unlockMilestone() {
     isUnlocked = true;
+
+    // Remove alert completely
     milestoneCont1.onclick = null;
+
+    // Enable navigation
     quizLink1.href = "../QUIZ/quiz.html";
     quizLink1.style.pointerEvents = "auto";
 }
 
+// ===============================
+// CORE UNLOCK LOGIC
+// ===============================
 function unlockIfEligible() {
     const percent = parseInt(totalProgress.style.width);
     console.log("Progress checked:", percent);
@@ -46,6 +61,7 @@ function unlockIfEligible() {
         });
 
         showToast("New Quiz is Unlocked!", "success");
+
         console.log("Milestone unlocked");
 
     } else {
@@ -53,12 +69,21 @@ function unlockIfEligible() {
     }
 }
 
+// ===============================
+// ALERT (LOCKED STATE)
+// ===============================
 function showAlert() {
     alert("To unlock this quiz, make at least 60% revision progress!");
 }
 
+// ===============================
+// INITIAL RUN
+// ===============================
 unlockIfEligible();
 
+// ===============================
+// OBSERVE PROGRESS BAR CHANGES
+// ===============================
 const observer = new MutationObserver(unlockIfEligible);
 
 observer.observe(totalProgress, {

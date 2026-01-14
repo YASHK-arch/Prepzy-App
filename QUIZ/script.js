@@ -1,3 +1,4 @@
+// ================= QUESTIONS =================
 var questions = [
     {
         question: "What will be the output of this code?",
@@ -102,11 +103,13 @@ public class Test {
     }
 ];
 
+// ================= STATE =================
 var index = 0;
 var score = 0;
 var timeLeft = 15;
 var timerId;
 
+// ================= ELEMENTS =================
 var questionEl = document.getElementById("question");
 var optionsEl = document.getElementById("options");
 var timeEl = document.getElementById("time");
@@ -118,12 +121,14 @@ var codeBox = document.querySelector(".code");
 
 totalEl.innerText = questions.length;
 
+// ================= START =================
 startQuiz();
 
 function startQuiz() {
     loadQuestion();
 }
 
+// ================= LOAD QUESTION =================
 function loadQuestion() {
     clearInterval(timerId);
     optionsEl.innerHTML = "";
@@ -134,8 +139,11 @@ function loadQuestion() {
     questionEl.innerText = q.question;
     currentEl.innerText = index + 1;
 
+ // ---------- CODE HANDLING fOR SAFETY----------    
   if (q.code && q.code.trim() !== "") {
     codeBox.style.display = "block";
+
+     // update code text ONLY
     codeBlock.textContent = q.code;
 
     codeBlock.removeAttribute("data-highlighted");
@@ -147,8 +155,7 @@ function loadQuestion() {
     codeBlock.textContent = "";
 }
 
-
-
+ // ---------- OPTIONS ----------
     for (var i = 0; i < q.options.length; i++) {
         var btn = document.createElement("button");
         btn.innerText = q.options[i];
@@ -160,6 +167,8 @@ function loadQuestion() {
     startTimer();
 }
 
+
+// ================= TIMER =================
 function startTimer() {
     timeLeft = 15;
     timeEl.innerText = timeLeft;
@@ -176,6 +185,8 @@ function startTimer() {
     }, 1000);
 }
 
+
+// ================= ANSWER CHECK =================
 function checkAnswer() {
     clearInterval(timerId);
 
@@ -198,6 +209,8 @@ function checkAnswer() {
     nextBtn.disabled = false;
 }
 
+
+// ================= DISABLE OPTIONS =================
 function disableOptions() {
     var buttons = optionsEl.children;
     for (var i = 0; i < buttons.length; i++) {
@@ -205,6 +218,7 @@ function disableOptions() {
     }
 }
 
+// ================= NEXT =================
 nextBtn.onclick = function () {
     index++;
     if (index < questions.length) {
@@ -214,6 +228,8 @@ nextBtn.onclick = function () {
     }
 };
 
+
+// ================= RESULT =================
 function showResult() {
     document.querySelector(".quiz-container").innerHTML = `
         <h2>Quiz Completed 🎉</h2>
