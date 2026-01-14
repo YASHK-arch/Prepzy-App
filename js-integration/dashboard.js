@@ -1,3 +1,9 @@
+/**
+ * dashboard.js
+ * Synchronizes individual subject cards and the global progress bar.
+ * Inherits total question counts from localStorage (saved by data.js).
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
     updateGlobalDashboard();
 });
@@ -24,6 +30,7 @@ function updateGlobalDashboard() {
     let grandTotalQuestions = 0;
     let grandTotalCompleted = 0;
 
+    // Filter all keys for those marked 'completed'
     const allKeys = Object.keys(localStorage);
     const completedKeys = allKeys.filter(key => 
         key.startsWith('status_') && localStorage.getItem(key) === 'completed'
@@ -32,24 +39,29 @@ function updateGlobalDashboard() {
     const topicCards = document.querySelectorAll('.topic-grid .topic-card');
     
     subjects.forEach((subject, index) => {
+        // --- 1. Get Totals from LocalStorage ---
         const storedTotal = localStorage.getItem(`total_questions_${subject.id}`);
         const inheritedTotal = parseInt(storedTotal) || 0; 
         
         let subjectCompleted = 0;
 
+        // --- 2. Calculate Completed for this Subject ---
         completedKeys.forEach(key => {
             if (subject.folders.some(folder => key.toLowerCase().includes(folder.toLowerCase()))) {
                 subjectCompleted++;
             }
         });
 
+        // Safety: Completed should not exceed total
         if (inheritedTotal > 0) subjectCompleted = Math.min(subjectCompleted, inheritedTotal);
 
         const subjectPercent = inheritedTotal > 0 ? Math.round((subjectCompleted / inheritedTotal) * 100) : 0;
         
+        // Add to Global Counters
         grandTotalQuestions += inheritedTotal;
         grandTotalCompleted += subjectCompleted;
 
+        // --- 3. Update Subject Card UI ---
         const card = topicCards[index];
         if (card) {
             const countText = card.querySelector('.count');
@@ -66,14 +78,19 @@ function updateGlobalDashboard() {
         }
     });
 
+    // --- 4. UPDATE GLOBAL (VIOLET) PROGRESS BAR ---
     let globalPercent = 0;
-    if (grandTotalQuestions > 0) {
-        globalPercent = Math.round((grandTotalCompleted / grandTotalQuestions) * 100);
-    }
+   if (grandTotalQuestions > 0) {
+      globalPercent = Math.round(
+    (grandTotalCompleted / grandTotalQuestions) * 100
+  );
+}
 
+    // Update text percentage
     const globalPercentDisplay = document.getElementById('overall-percent');
     if (globalPercentDisplay) globalPercentDisplay.innerText = `${globalPercent}%`;
 
+    // Update bar width
     const globalBarFill = document.querySelector('.main-progress .progress-bar-fill');
     if (globalBarFill) {
         globalBarFill.style.width = `${globalPercent}%`;
@@ -81,9 +98,10 @@ function updateGlobalDashboard() {
     }
 }
 
+
 document.getElementById("syllabusBtn").onclick = () => {
-    window.open(
-        "https://docs.google.com/spreadsheets/d/153n2HUcNhMuUvMSzId3rEAQrg5ltmuzFIV_j_6TmGiQ/edit?gid=77917834#gid=77917834",
-        "_blank"
-    );
+  window.open(
+    "https://docs.google.com/spreadsheets/d/153n2HUcNhMuUvMSzId3rEAQrg5ltmuzFIV_j_6TmGiQ/edit?gid=77917834#gid=77917834",
+    "_blank"
+  );
 };
