@@ -150,13 +150,11 @@ Copy code
 
 1. Clone or download the repository:
  ```bash
- git clone <repository-url>
+ git clone https://github.com/YASHK-arch/Prepzy-App.git
 Open the project folder.
 
 Start the application by opening:
 
-diff
-Copy code
 index.html
 Navigate through subjects, topics, and questions using the UI.
   
