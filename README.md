@@ -67,82 +67,11 @@ This design ensures:
 
 ![Prepzy Script Architecture](Script-architecture.png)
 
----
-
-### 🧱 Major Script Flows Explained
+```! NOTE THIS ARCHITECTURE, EACH NODE OF COLUMN MAY NOT BE FROM THE SAME SCRIPT ,ITS THE EXECUTION FLOW NOT THE INDIVIDUAL SCRIPT FLOW  ```
 
 ---
 
-### 1️⃣ Question Page Flow  
-*(Example: `/JAVA/Prefix sum/Q1.html`)*
 
-- Question page loads
-- `storage.js` runs on `DOMContentLoaded`
-- Folder name and filename are extracted from the URL
-- A unique `localStorage` key is generated per question
-- Completion status is checked from storage
-- UI updates dynamically:
-  - If completed → **Done button disabled**, completed UI shown
-  - If not completed → user can mark question as done
-- Clicking **Done** stores completion status in `localStorage`
-
----
-
-### 2️⃣ Subject Page Flow  
-*(Example: `java.html`)*
-
-- Subject page loads
-- Subject name is detected from filename
-- Total questions are counted dynamically
-- All topic groups are scanned
-- Completion status of each question is checked
-- Topic-level and subject-level progress is calculated
-- UI updates include:
-  - Topic progress bars
-  - Folder percentages
-  - Subject header progress indicator
-
----
-
-### 3️⃣ Topic Toggle Logic (`topic.js` – Parallel Flow)
-
-- Handles UI-only interactions
-- Runs independently from progress calculations
-- Allows expanding and collapsing topic groups
-- Ensures only one topic group is expanded at a time
-- Toggles button text between **View** and **Close**
-
----
-
-### 4️⃣ Dashboard Flow  
-*(Dashboard: `index.html`)*
-
-- Dashboard loads
-- `dashboard.js` executes on `DOMContentLoaded`
-- Subject definitions and folder mappings are read
-- Total questions per subject are fetched from storage
-- All `status_*` keys are scanned from `localStorage`
-- Completed questions are counted per subject
-- Dashboard UI is updated dynamically
-
----
-
-### 4️⃣.a Global Dashboard Calculation
-
-- Aggregates:
-  - Total number of questions across all subjects
-  - Total completed questions
-- Calculates global progress:
-  
- ```globalPercent = (completed / total) * 100```
-
-yaml
-Copy code
-- Updates:
-- Subject cards
-- Subject progress bars
-- Global progress bar
-- Overall percentage label
 
 ---
 
