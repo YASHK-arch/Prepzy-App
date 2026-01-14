@@ -62,7 +62,7 @@ This design ensures:
 
 ### 📌 Architecture Overview Diagram
 
-> 📁 Place this image in the **root directory** of the repository  
+> 📁 Detailed Script Flow **(Open the image to get the zoomed image)** 
 > 📄 Filename: `Script-architecture.png`
 
 ![Prepzy Script Architecture](Script-architecture.png)
