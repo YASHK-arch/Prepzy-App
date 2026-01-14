@@ -164,11 +164,11 @@ Navigate through subjects, topics, and questions using the UI.
 ```
 
 ## ⚠️ Known Limitations
--Progress is stored only in browser localStorage
--Data does not sync across devices or browsers
--No authentication or user login system
--UI is optimized mainly for desktop screens
--Manual clearing of localStorage required to reset progress
+- Progress is stored only in browser localStorage
+- Data does not sync across devices or browsers
+- No authentication or user login system
+- UI is optimized mainly for desktop screens
+- Manual clearing of localStorage required to reset progress
 
 ## 🧑‍💻 Technologies Used
 - HTML5
