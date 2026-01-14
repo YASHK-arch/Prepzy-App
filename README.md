@@ -129,6 +129,8 @@ Navigate through subjects, topics, and questions using the UI.
 ## 💯 Prepzy Future Goals
 - Prepzy is a repository where you can save your tagged conceptually important questions from different platforms like udemy, scaler, codeforces or LeetCode, along with your curated notes.
 <br>
+
 Current version is based on my present knowledge we tried to achieve, as we move forward, we gonna make question adding Client-sided as well as find a way to dynamically change the html structure as well change the question directly through a single page, which here was just working through a redirecting mechnism.
+
 <br>
 This approach will reduce complexity and storage size on large databases.
