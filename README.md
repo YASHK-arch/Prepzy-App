@@ -12,7 +12,7 @@ Prepzy follows a **decentralized page structure with centralized storage logic**
 ## ❓ Problem Statement
 
 Students preparing for technical and academic exams often face difficulties such as:
-- Managing preparation across multiple subjects and topics
+- Managing revision of important questions and topics across multiple subjects.
 - Tracking completed vs pending questions
 - Maintaining progress across multiple study sessions
 
@@ -133,7 +133,8 @@ This design ensures:
   - Total number of questions across all subjects
   - Total completed questions
 - Calculates global progress:
-globalPercent = (completed / total) * 100
+  
+ ```globalPercent = (completed / total) * 100```
 
 yaml
 Copy code
@@ -158,25 +159,19 @@ diff
 Copy code
 index.html
 Navigate through subjects, topics, and questions using the UI.
-
+  
 ✅ No server, backend, or database setup required.
+```
 
-⚠️ Known Limitations
-Progress is stored only in browser localStorage
+## ⚠️ Known Limitations
+-Progress is stored only in browser localStorage
+-Data does not sync across devices or browsers
+-No authentication or user login system
+-UI is optimized mainly for desktop screens
+-Manual clearing of localStorage required to reset progress
 
-Data does not sync across devices or browsers
-
-No authentication or user login system
-
-UI is optimized mainly for desktop screens
-
-Manual clearing of localStorage required to reset progress
-
-🧑‍💻 Technologies Used
-HTML5
-
-CSS3
-
-JavaScript (ES6)
-
-Browser LocalStorage
+## 🧑‍💻 Technologies Used
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Browser LocalStorage
