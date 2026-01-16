@@ -18,7 +18,7 @@ function updateGlobalDashboard() {
         {
             id: "js",
             name: 'Web Dev: Javascript',
-            folders: ['Asynchronous Programming - 1', 'Asynchronous Programming - 2', 'Kanban Task Manager', 'working with promises']
+            folders: ['Asynchronous Programming - 1', 'Asynchronous Programming - 2', 'Kanban Task Manager', 'working with promises', 'async and await']
         },
         {
             id: "maths",
