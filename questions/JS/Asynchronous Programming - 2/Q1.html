@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture 7 | Two Files in Series</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Lecture 7 – H1 : Two Files in Series</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q1. Lecture 7: H1 – Two Files in Series</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Complete the function <strong>twoSeries(file1, file2, ansArray)</strong>,
+        which takes two file names and an array as input.
+      </p>
+      <p>
+        The files must be read <strong>serially</strong> using the provided
+        <strong>fetchByCb(fileName, callback)</strong> function.
+      </p>
+
+      <h2>Requirements</h2>
+      <ul>
+        <li>Both files must be read one after the other (not in parallel)</li>
+        <li>Add the content of both files into <strong>ansArray</strong></li>
+        <li>
+          After reading both files, append the string
+          <strong>"All files have been read"</strong> to the array
+        </li>
+      </ul>
+
+      <h2>Function Signature</h2>
+      <div class="code-box">
+        function twoSeries(file1, file2, ansArray)
+      </div>
+
+      <h2>Input Format</h2>
+      <div class="code-box">
+let ansArray = [];
+twoSeries("FILE 1", "FILE 2", ansArray);
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          The <strong>ansArray</strong> should contain the contents of both files
+          in order, followed by a completion message.
+        </p>
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+ansArray = [
+  "content : FILE 1",
+  "content : FILE 2",
+  "All files have been read"
+]
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The first file is read using <strong>fetchByCb</strong>.
+        Once completed, the second file is read.
+        After both files are processed, the final message is added.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;script defer&gt;
+        function fetchByCb(fileName, cb) {
+            setTimeout(function () {
+                cb(`content : ${fileName}`);
+            }, 100 * Math.random());
+        }
+    &lt;/script&gt;
+
+    &lt;!-- Write your code solution here, inside the twoSeries function --&gt;
+    &lt;!-- WARNING:
+        Don't make any changes outside the given function. (would fail test cases)
+        Write the required code and return the correct answer. --&gt;
+
+    &lt;script id="solution" defer&gt;
+        function twoSeries(file1, file2, ansArray) {
+           fetchByCb(file1, function (data1) {
+               ansArray.push(data1);
+
+               fetchByCb(file2, function (data2) {
+                  ansArray.push(data2);
+                  ansArray.push("All files have been read");
+               });
+           });
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q2.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

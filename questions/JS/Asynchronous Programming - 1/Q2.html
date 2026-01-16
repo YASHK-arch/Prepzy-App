@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q3 | Callback Chain</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>3. JS Core – Callback Chain</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q3. JS Core – Callback Chain</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Write a function <strong>callbackChain</strong> that takes an array of
+        functions as callbacks.
+      </p>
+      <p>
+        The callbacks should be executed <strong>one after another</strong>
+        in the order they are provided, with a delay of
+        <strong>500 milliseconds</strong> between each execution.
+      </p>
+
+      <h2>Function Signature</h2>
+      <div class="code-box">
+        function callbackChain(callbacks)
+      </div>
+
+      <h2>Input Format</h2>
+      <p>
+        The first and only argument is an array of
+        <strong>callback functions</strong>.
+      </p>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          Executes each callback sequentially with a
+          <strong>500ms delay</strong> between executions.
+        </p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+callbackChain([
+  () => console.log("First callback"),
+  () => console.log("Second callback"),
+  () => console.log("Third callback")
+]);
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+Prints all three messages with a 500ms delay between each
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        Each callback is scheduled using <strong>setTimeout</strong>,
+        ensuring ordered execution with increasing delays.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;!-- Write your code solution here, inside the main function --&gt;
+    &lt;!-- WARNING:
+        Don't make any changes outside the given function. (would fail test cases)
+        Write the required code and return the correct answer. --&gt;
+
+    &lt;script id="solution" defer&gt;
+        function callbackChain(callbacks) {
+              for (let i = 0; i &lt; callbacks.length; i++) {
+                 setTimeout(function () {
+                    callbacks[i]();
+                 }, i * 500);
+              }
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+
+
+
+
+
+
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q1.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Core | Currency Converter Promise</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>JS Core – Currency Converter (Promise)</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q4. JS Core – Currency Converter Promise</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Write a function <strong>convertCurrency</strong> that takes an
+        <strong>amount</strong>, a <strong>source currency</strong>,
+        and a <strong>target currency</strong>, and returns a
+        <strong>Promise</strong>.
+      </p>
+      <p>
+        The Promise should <strong>resolve</strong> with the converted
+        amount if the conversion is successful; otherwise, it should
+        <strong>reject</strong> with an error message.
+      </p>
+
+      <h2>Function Signature</h2>
+      <div class="code-box">
+        function convertCurrency(amount, sourceCurrency, targetCurrency)
+      </div>
+
+      <h2>Requirements</h2>
+      <ul>
+        <li>Use a Promise to handle currency conversion</li>
+        <li>Resolve with the converted amount if currencies are valid</li>
+        <li>Reject with an error message if any currency is invalid</li>
+      </ul>
+
+      <h2>Example Test Cases</h2>
+      <div class="code-box">
+convertCurrency(100, "USD", "EUR")
+  .then(result => console.log(`Converted amount: ${result} EUR`))
+  .catch(error => console.error(error));
+
+convertCurrency(50, "USD", "JPY")
+  .then(result => console.log(`Converted amount: ${result} JPY`))
+  .catch(error => console.error(error));
+// Expected output:
+// "Error converting currency: Invalid currency"
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        If both source and target currencies exist in the exchange rate
+        table, the Promise resolves with the converted value.
+        Otherwise, the Promise is rejected with an error message.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-javascript">
+const exchangeRates = {
+    'USD': 1.0,
+    'EUR': 0.85,
+    'GBP': 0.75,
+};
+
+function convertCurrency(amount, sourceCurrency, targetCurrency) {
+    return new Promise(function (resolve, reject) {
+        if (exchangeRates[sourceCurrency] && exchangeRates[targetCurrency]) {
+            let sourceRate = exchangeRates[sourceCurrency];
+            let targetRate = exchangeRates[targetCurrency];
+
+            let convertedAmount = amount * (targetRate / sourceRate);
+            resolve(convertedAmount);
+        } else {
+            reject("Error converting currency: Invalid currency");
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q1.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

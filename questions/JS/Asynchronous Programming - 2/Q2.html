@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecture 7 | n Files in Series</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Lecture 7 – H2 : n Files in Series</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q5. Lecture 7: H2 – n Files in Series</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Complete the function
+        <strong>nSerialReader(idx, files, ansArray)</strong>,
+        which reads multiple files <strong>serially</strong>.
+      </p>
+
+      <h2>Function Parameters</h2>
+      <ul>
+        <li><strong>idx</strong> – current index (initially 0)</li>
+        <li><strong>files</strong> – array of file names</li>
+        <li><strong>ansArray</strong> – empty array to store file contents</li>
+      </ul>
+
+      <h2>Requirements</h2>
+      <ul>
+        <li>All files must be read serially using <strong>fetchByCb</strong></li>
+        <li>Add the content of each file to <strong>ansArray</strong></li>
+        <li>Prepend each file’s content with <strong>"content -> "</strong></li>
+      </ul>
+
+      <h2>Function Signature</h2>
+      <div class="code-box">
+        function nSerialReader(idx, files, ansArray)
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+let ansArray = [];
+let files = ["file1.txt", "file2.txt", "file3.txt"];
+nSerialReader(0, files, ansArray);
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+ansArray = [
+  "content -> content of file1.txt",
+  "content -> content of file2.txt",
+  "content -> content of file3.txt"
+]
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The function reads one file at a time.
+        Once the current file finishes reading, the next file
+        is processed using recursion until all files are read.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;script defer&gt;
+        function fetchByCb(fileName, cb) {
+            setTimeout(function () {
+                cb(`content of ${fileName}`);
+            }, 100 * Math.random());
+        }
+    &lt;/script&gt;
+
+    &lt;!-- Write your code solution here, inside the nSerialReader function --&gt;
+    &lt;!-- WARNING:
+        Don't make any changes outside the given function. (would fail test cases)
+        Write the required code and return the correct answer. --&gt;
+
+    &lt;script id="solution" defer&gt;
+       function nSerialReader(idx, files, ansArray) {
+
+           if (idx === files.length) return; // base case
+
+           fetchByCb(files[idx], function (data) {
+               ansArray.push("content -> " + data);
+
+               // read next file AFTER current finishes
+               nSerialReader(idx + 1, files, ansArray);
+           });
+       }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q1.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

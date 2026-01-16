@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Q2 | Periodic Printer</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>2. JS Core – Periodic Printer</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q2. JS Core – Periodic Printer</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Write a function <strong>periodicPrinter</strong> that takes a
+        <strong>callback function</strong> and a
+        <strong>timeInterval</strong> in milliseconds.
+      </p>
+      <p>
+        The function should use <strong>setInterval</strong> to repeatedly
+        execute the callback function every specified time interval until
+        explicitly stopped.
+      </p>
+
+      <h2>Important Note</h2>
+      <div class="gray-box">
+        <p>
+          You must <strong>return the intervalId</strong> from the function.
+          If not returned, the backend will not be able to clear the interval,
+          resulting in a failed test case.
+        </p>
+      </div>
+
+      <h2>Function Signature</h2>
+      <div class="code-box">
+        function periodicPrinter(callback, timeInterval)
+      </div>
+
+      <h2>Input Format</h2>
+      <p>
+        First argument is a <strong>callback function</strong>.<br>
+        Second argument is an integer <strong>timeInterval</strong>
+        representing milliseconds.
+      </p>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          Return the <strong>intervalId</strong> created by
+          <strong>setInterval</strong>.
+        </p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+periodicPrinter(() =&gt; {
+  console.log("This is callback");
+}, 1000);
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+Prints "This is callback" every 1000ms
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The callback function is executed every 1000 milliseconds.
+        The returned intervalId can later be passed to
+        <strong>clearInterval</strong> to stop execution.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+    &lt;!-- Write your code solution here, inside the main function --&gt;
+    &lt;!-- WARNING:
+        Don't make any changes outside the given function. (would fail test cases)
+        Write the required code and return the correct answer. --&gt;
+
+    &lt;script id="solution" defer&gt;
+        function periodicPrinter(callback, timeInterval) {
+            const intervalID = setInterval(callback, timeInterval);
+            return intervalID;
+        }
+    &lt;/script&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+
+
+
+
+
+
+
+
+
+
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q2.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>
