@@ -30,11 +30,6 @@ function updateGlobalDashboard() {
     let grandTotalQuestions = 0;
     let grandTotalCompleted = 0;
 
-    // Filter all keys for those marked 'completed'
-    const allKeys = Object.keys(localStorage);
-    const completedKeys = allKeys.filter(key =>
-        key.startsWith('status_') && localStorage.getItem(key) === 'completed'
-    );
 
     const topicCards = document.querySelectorAll('.topic-grid .topic-card');
 
@@ -43,19 +38,14 @@ function updateGlobalDashboard() {
         const storedTotal = localStorage.getItem(`total_questions_${subject.id}`);
         const inheritedTotal = parseInt(storedTotal) || 0;
 
-        let subjectCompleted = 0;
+        // >>> FIX START (REPLACED LOGIC)
+        const storedCompleted = localStorage.getItem(`completed_questions_${subject.id}`);
+        const subjectCompleted = parseInt(storedCompleted) || 0;
+        // >>> FIX END
 
-        // --- 2. Calculate Completed for this Subject ---
-        completedKeys.forEach(key => {
-            if (subject.folders.some(folder => key.toLowerCase().includes(folder.toLowerCase()))) {
-                subjectCompleted++;
-            }
-        });
-
-        // Safety: Completed should not exceed total
-        if (inheritedTotal > 0) subjectCompleted = Math.min(subjectCompleted, inheritedTotal);
-
-        const subjectPercent = inheritedTotal > 0 ? Math.round((subjectCompleted / inheritedTotal) * 100) : 0;
+        const subjectPercent = inheritedTotal > 0
+            ? Math.round((subjectCompleted / inheritedTotal) * 100)
+            : 0;
 
         // Add to Global Counters
         grandTotalQuestions += inheritedTotal;
@@ -86,18 +76,15 @@ function updateGlobalDashboard() {
         );
     }
 
-    // Update text percentage
     const globalPercentDisplay = document.getElementById('overall-percent');
     if (globalPercentDisplay) globalPercentDisplay.innerText = `${globalPercent}%`;
 
-    // Update bar width
     const globalBarFill = document.querySelector('.main-progress .progress-bar-fill');
     if (globalBarFill) {
         globalBarFill.style.width = `${globalPercent}%`;
         globalBarFill.style.backgroundColor = '#4CAF50';
     }
 }
-
 
 document.getElementById("syllabusBtn").onclick = () => {
     window.open(

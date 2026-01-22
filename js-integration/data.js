@@ -89,6 +89,14 @@ function updateDynamicProgress() {
             <span>${totalCompletedCount} of ${totalQuestionsCount} completed (${overallPercentage}%)</span>
         `;
     }
+
+    // >>> FIX START (NEW – this was missing)
+    // Report COMPLETED count to dashboard (single source of truth)
+    localStorage.setItem(
+        `completed_questions_${subjectName}`,
+        totalCompletedCount
+    );
+    // >>> FIX END
     
     console.log(`Sync complete for ${subjectName}: Reporting ${allQuestionsOnPage.length} total questions.`);
 }
