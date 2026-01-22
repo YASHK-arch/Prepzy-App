@@ -18,6 +18,38 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
     rel="stylesheet">
+
+  <!-- LOCAL OVERRIDES (SAFE) -->
+  <style>
+    .solution-layout {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .output-panel {
+      width: 45%;
+      background: #0f0f0f;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .output-panel h4 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: #bbb;
+      font-weight: 500;
+    }
+
+    .output-panel img {
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid #2b2b2b;
+    }
+  </style>
 </head>
 
 <body>
@@ -93,10 +125,14 @@ Event triggered on: BODY
     </div>
   </div>
 
-  <!-- ================= SOLUTION SECTION ================= -->
-  <div class="solution">
-    <pre>
-      <code class="language-html">
+
+  <!-- ================= SOLUTION + OUTPUT ================= -->
+  <div class="solution-layout">
+
+    <!-- ===== CODE PANEL (UNCHANGED) ===== -->
+    <div class="solution">
+      <pre>
+        <code class="language-html">
 &lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 
@@ -180,19 +216,25 @@ Event triggered on: BODY
 &lt;/body&gt;
 
 &lt;/html&gt;
-      </code>
-    </pre>
+        </code>
+      </pre>
+    </div>
+
+    <!-- ===== OUTPUT IMAGE PANEL (NEW) ===== -->
+    <div class="output-panel">
+      <h4>Expected Output</h4>
+      <img src="output.png" alt="Event Bubbling Output">
+    </div>
+
   </div>
 
 </div>
 
 <footer>
-  
   <button class="done">DONE ✅</button>
   <div class="done-status">Revision Completed !!</div>
 </footer>
 
-<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
 <script>
   hljs.highlightAll();

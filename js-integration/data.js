@@ -85,7 +85,7 @@ function updateDynamicProgress() {
     if (overallFill) overallFill.style.width = overallPercentage + "%";
     if (statsText) {
         statsText.innerHTML = `
-            <span>Overall Progress: ${totalCompletedCount} completed out of ${totalQuestionsCount} questions</span>
+            <span>Overall Progress: ${totalCompletedCount} completed out of ${totalQuestionsCount} questions/pdfs</span>
             <span>${totalCompletedCount} of ${totalQuestionsCount} completed (${overallPercentage}%)</span>
         `;
     }
