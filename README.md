@@ -2,7 +2,7 @@
 
 ## 📌 Project Description
 
-**Prepzy** is a web-based exam preparation platform designed to help students practice questions topic-wise, track progress, and visualize completion across subjects.  
+**Prepzy** is a web-based exam preparation platform designed to help students practice Interview questions topic-wise, track progress, and visualize completion across subjects.  
 The project is implemented using **HTML, CSS, and Vanilla JavaScript**, with a strong emphasis on **DOM manipulation**, **localStorage-based state management**, and **multi-page script coordination**.
 
 Prepzy follows a **decentralized page structure with centralized storage logic**, simulating how real-world front-end applications manage shared state across multiple views without a backend.

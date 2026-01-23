@@ -24,7 +24,7 @@
             <div class="dropdown-content">
                 <a href="java.html">DSA</a>
                 <a href="js.html">JS</a>
-                <a href="#">Maths</a>
+                <a href="#" id = "nav_development">Maths</a>
             </div>
         </div>
     </div>
@@ -225,9 +225,15 @@
             </div>
         </section>
     </div>
-
+     
     <script src="../js-integration/topic.js"></script>
     <script src="../js-integration/data.js"></script>
+    <script>
+     let nav_mthbtn = document.querySelector('#nav_development');
+         nav_mthbtn.addEventListener('click', function () {
+            alert('No problems available for now.....')
+        })
+  </script>
 </body>
 
 </html>

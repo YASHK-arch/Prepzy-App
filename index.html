@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,14 +9,16 @@
     <link rel="stylesheet" href="styles/dashboard.css">
     <link rel="stylesheet" href="QUIZ/floating notification.css">
 </head>
+
 <body>
     <div class="navbar">
         <a href="#home" id="home">
-            <img src="logo.png" alt="Prepzy Logo" class="nav-logo" width="30px" height="30px" style="padding-right: 8px">
+            <img src="logo.png" alt="Prepzy Logo" class="nav-logo" width="30px" height="30px"
+                style="padding-right: 8px">
             Prepzy
         </a>
         <div class="dropdown">
-            <button class="dropbtn">Subject 
+            <button class="dropbtn">Subject
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
@@ -23,7 +26,7 @@
                 <a href="subjects/js.html">JS</a>
                 <a href="#" id="nav_development">Maths</a>
             </div>
-        </div> 
+        </div>
     </div>
 
     <div class="container">
@@ -33,13 +36,13 @@
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" style="width: 0%; background: #4CAF50;"></div>
                 </div>
-               <p>
-  🔥 14-Day Revision Streak Target |
-  <span class="flicker">📅 Exam in <span id="exam-days">--</span> Days</span>
-               </p>
+                <p>
+                    🔥 14-Day Revision Streak Target |
+                    <span class="flicker">📅 Exam in <span id="exam-days">--</span> Days</span>
+                </p>
             </div>
         </header>
-       
+
         <main class="topic-grid">
             <div class="topic-card" style="border-top: 5px solid #4CAF50;">
                 <div class="card-content">
@@ -90,16 +93,76 @@
             </div>
         </main>
 
+
+        <!-- ================= INFO POPUP MODAL ================= -->
+        <div class="info-modal" id="infoModal">
+
+            <div class="info-box">
+
+                <!-- Close Button -->
+                <span class="close-btn" id="closeModal">&times;</span>
+
+                <h2 class="modal-title">Revision Flow</h2>
+
+                <!-- Flow Animation -->
+                <div class="flow-container">
+
+                    <div class="step-box blue animate-step">
+                        REVISE NOTES
+                    </div>
+
+                    <div class="arrow animate-arrow">➜</div>
+
+                    <div class="step-box green animate-step">
+                        REVISE IMP QUESTIONS
+                    </div>
+
+                    <div class="arrow animate-arrow">➜</div>
+
+                    <div class="step-box yellow animate-step">
+                        TRACK PROGRESS
+                    </div>
+
+                    <div class="arrow animate-arrow">➜</div>
+
+                    <div class="step-box red animate-step">
+                        UNLOCK QUIZ AT <br> &gt;60% REVISION
+                    </div>
+
+                </div>
+
+                <div class="github">
+                    <div class="tooltip">
+                        <a href="https://github.com/YASHK-arch/Prepzy-App" target="_blank">
+                            <button id="gihub">
+                                <i class="fa fa-github"></i>
+                            </button>
+                        </a>
+                        
+                        <span class="tooltip-text">
+                            View Github repository of this Open source project
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
         <footer>
             <button class="btn-quiz" id="syllabusBtn">View Trimester Syllabus</button>
+            <button class="btn-info" id="info">?</button>
         </footer>
     </div>
-<a href = "subjects/java.html#gift2"><div id="toast-container"> </div></a>
+    <a href="subjects/java.html#gift2">
+        <div id="toast-container"> </div>
+    </a>
 
     <script src="js-integration/dashboard.js"></script>
-     <script src="QUIZ/toast.js"></script>
+    <script src="QUIZ/toast.js"></script>
 
-     <script>
+    <script>
         // ===== EXAM COUNTDOWN LOGIC =====
         const examDate = new Date("2026-03-28");
         const today = new Date();
@@ -113,22 +176,66 @@
         const examDaysSpan = document.getElementById("exam-days");
 
         if (daysLeft > 0) {
-        examDaysSpan.textContent = daysLeft;
+            examDaysSpan.textContent = daysLeft;
         } else if (daysLeft === 0) {
-        examDaysSpan.textContent = "Today 🎯";
+            examDaysSpan.textContent = "Today 🎯";
         } else {
-        examDaysSpan.textContent = "Completed ✅";
+            examDaysSpan.textContent = "Completed ✅";
         }
 
         let mthbtn = document.querySelector('.under-development');
         let nav_mthbtn = document.querySelector('#nav_development');
+         nav_mthbtn.addEventListener('click', function () {
+            alert('No problems available for now.....')
+        })
+        mthbtn.addEventListener('click', function () {
+            alert('No problems available for now.....')
+        })
+       
 
-        mthbtn.addEventListener('click', function(){
-            alert('No problems available for now.....')
-        })
-        nav_mthbtn.addEventListener('click', function(){
-            alert('No problems available for now.....')
-        })
-     </script>
+
+        const infoBtn = document.getElementById("info");
+        const modal = document.getElementById("infoModal");
+        const closeBtn = document.getElementById("closeModal");
+
+        const steps = document.querySelectorAll(".animate-step");
+        const arrows = document.querySelectorAll(".animate-arrow");
+
+        // Function to start animation
+        function startFlowAnimation() {
+            steps.forEach(step => step.classList.remove("show"));
+            arrows.forEach(arrow => arrow.classList.remove("show-arrow"));
+
+            steps.forEach((step, index) => {
+                setTimeout(() => {
+                    step.classList.add("show");
+
+                    if (index < arrows.length) {
+                        setTimeout(() => {
+                            arrows[index].classList.add("show-arrow");
+                        }, 300);
+                    }
+                }, index * 800);
+            });
+        }
+
+        infoBtn.addEventListener("click", () => {
+            modal.classList.add("active");
+            startFlowAnimation();
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.classList.remove("active");
+        });
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("active");
+            }
+        });
+
+
+    </script>
 </body>
+
 </html>

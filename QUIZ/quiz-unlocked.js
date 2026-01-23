@@ -7,6 +7,7 @@ const milestoneCont2 = document.querySelector('#gift2');
 const contText = document.querySelectorAll('.unlocked-text');
 const viewButton = document.querySelectorAll('.view-btn.special');
 const quizLink1 = document.querySelector('#quix1');
+const quizLink2 = document.querySelector('#quix2');
 
 let isUnlocked = false;
 
@@ -22,6 +23,8 @@ function lockMilestone() {
     // Disable navigation
     quizLink1.href = "javascript:void(0)";
     quizLink1.style.pointerEvents = "none";
+    quizLink2.href = "javascript:void(0)";
+    quizLink2.style.pointerEvents = "none";
 }
 
 function unlockMilestone() {
@@ -33,6 +36,8 @@ function unlockMilestone() {
     // Enable navigation
     quizLink1.href = "../QUIZ/quiz.html";
     quizLink1.style.pointerEvents = "auto";
+     quizLink2.href = "../QUIZ/quiz.html";
+    quizLink2.style.pointerEvents = "auto";
 }
 
 // ===============================
