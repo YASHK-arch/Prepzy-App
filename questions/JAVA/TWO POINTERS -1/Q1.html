@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pairs with Given Difference</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Q3 – Pairs with Given Difference</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q3. Pairs with Given Difference</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Given a one-dimensional integer array <strong>A</strong> of size
+        <strong>N</strong> and an integer <strong>B</strong>,
+        count all <strong>distinct pairs</strong> with difference equal to
+        <strong>B</strong>.
+      </p>
+      <p>
+        A pair is defined as an integer pair <strong>(x, y)</strong>,
+        where both values exist in the array and
+        <strong>|x − y| = B</strong>.
+      </p>
+
+      <h2>Problem Constraints</h2>
+      <ul>
+        <li>1 ≤ N ≤ 10<sup>4</sup></li>
+        <li>0 ≤ A[i], B ≤ 10<sup>5</sup></li>
+      </ul>
+
+      <h2>Input Format</h2>
+      <div class="gray-box">
+        <p>First argument is an integer array <strong>A</strong>.</p>
+        <p>Second argument is an integer <strong>B</strong>.</p>
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          Return an integer denoting the count of all distinct pairs
+          with difference equal to <strong>B</strong>.
+        </p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+A = [1, 5, 3, 4, 2]
+B = 3
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+2
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The pairs with difference 3 are {1, 4} and {5, 2}.
+        Hence, the output is 2.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+public class Solution {
+    public int solve(int[] A, int B) {
+        Arrays.sort(A);
+        int i = 0;
+        int j = 1;
+        int count = 0;
+
+        while (i &lt; A.length &amp;&amp; j &lt; A.length) {
+
+            // Avoid same index
+            if (i == j) {
+                j++;
+                continue;
+            }
+
+            int diff = A[j] - A[i];
+
+            if (diff == B) {
+                int x = A[i];
+                int y = A[j];
+
+                // Skip duplicates of x
+                while (i &lt; j &amp;&amp; A[i] == x) {
+                    i++;
+                }
+
+                // Skip duplicates of y
+                while (j &lt; A.length &amp;&amp; A[j] == y) {
+                    j++;
+                }
+
+                count++;
+            }
+            else if (diff &lt; B) {
+                j++;
+            }
+            else {
+                i++;
+            }
+        }
+
+        return count;
+    }
+}
+
+
+
+
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q4.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

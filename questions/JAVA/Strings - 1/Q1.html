@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Longest Palindromic Substring</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Q1 – Longest Palindromic Substring</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q1. Longest Palindromic Substring</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Given a string <strong>A</strong> of size <strong>N</strong>,
+        find and return the <strong>longest palindromic substring</strong> in A.
+      </p>
+
+      <p>
+        A substring of string A is <strong>A[i...j]</strong> where
+        <strong>0 ≤ i ≤ j &lt; len(A)</strong>.
+      </p>
+
+      <h2>Palindrome String</h2>
+      <p>
+        A string which reads the same backwards.
+        More formally, A is a palindrome if <strong>reverse(A) = A</strong>.
+      </p>
+
+      <p>
+        In case of conflict, return the substring which occurs first
+        (with the least starting index).
+      </p>
+
+      <h2>Problem Constraints</h2>
+      <ul>
+        <li>1 ≤ N ≤ 6000</li>
+      </ul>
+
+      <h2>Input Format</h2>
+      <div class="gray-box">
+        <p>The first and only argument is a string <strong>A</strong>.</p>
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          Return a string denoting the longest palindromic substring of A.
+        </p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+Input 1:
+A = "aaaabaaa"
+
+Input 2:
+A = "abba"
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+Output 1:
+"aaabaaa"
+
+Output 2:
+"abba"
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The longest palindromic substring in "aaaabaaa" is of length 7:
+        <strong>"aaabaaa"</strong>.
+      </p>
+      <p>
+        The longest palindromic substring in "abba" is of length 4:
+        <strong>"abba"</strong>.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+public class Solution {
+    public String longestPalindrome(String A) {
+        int n = A.length();
+
+        int start = 0, maxLen = 1; // store best substring
+
+        for (int center = 0; center < n; center++) {
+
+            // ----- odd length palindrome -----
+            int l = center - 1, r = center + 1;
+            while (l >= 0 && r < n && A.charAt(l) == A.charAt(r)) {
+                int len = r - l + 1;
+                if (len > maxLen) {
+                    maxLen = len;
+                    start = l;
+                }
+                l--;
+                r++;
+            }
+
+            // ----- even length palindrome -----
+            l = center;
+            r = center + 1;
+            while (l >= 0 && r < n && A.charAt(l) == A.charAt(r)) {
+                int len = r - l + 1;
+                if (len > maxLen) {
+                    maxLen = len;
+                    start = l;
+                }
+                l--;
+                r++;
+            }
+        }
+
+        return A.substring(start, start + maxLen);
+    }
+}
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q2.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

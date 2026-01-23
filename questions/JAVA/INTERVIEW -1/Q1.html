@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rain Water Trapped</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+
+  <!-- Extra styling to match platform -->
+  <style>
+    .blue-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin-top: 28px;
+    }
+
+    .section-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 12px;
+    }
+
+    .example-box {
+      background: #f3f4f6;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 12px;
+      font-family: monospace;
+      font-size: 15px;
+      white-space: pre-line;
+    }
+
+    .example-image {
+      display: block;
+      max-width: 100%;
+      margin: 18px auto;
+      border-radius: 12px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .highlight {
+      font-weight: 700;
+      color: #1d4ed8;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h4>Q1 – Rain Water Trapped</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q1. Rain Water Trapped</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+
+      <!-- Problem Description -->
+      <h2 class="blue-title">Problem Description</h2>
+      <p>
+        Imagine a histogram where the bars' heights are given by the array
+        <strong>A</strong>. Each bar is of
+        <span class="highlight">uniform width (1 unit)</span>.
+      </p>
+
+      <p>
+        When it rains, water will accumulate in the valleys between the bars.
+        Your task is to calculate the
+        <span class="highlight">total amount of water</span> that can be trapped.
+      </p>
+
+      <!-- Constraints -->
+      <h2 class="blue-title">Problem Constraints</h2>
+      <div class="section-box">
+        <p>1 ≤ |A| ≤ 10<sup>5</sup></p>
+        <p>0 ≤ A[i] ≤ 10<sup>5</sup></p>
+      </div>
+
+      <!-- Input Format -->
+      <h2 class="blue-title">Input Format</h2>
+      <div class="section-box">
+        <p>First and only argument is the Integer Array <strong>A</strong>.</p>
+      </div>
+
+      <!-- Output Format -->
+      <h2 class="blue-title">Output Format</h2>
+      <div class="section-box">
+        <p>
+          Return an Integer denoting the total amount of water that can be trapped.
+        </p>
+      </div>
+
+      <!-- Example -->
+      <h2 class="blue-title">Example</h2>
+      <p>
+        The array <strong>A = [5, 4, 1, 4, 3, 2, 7]</strong> is visualized below.
+        The total trapped water is <strong>11</strong>.
+      </p>
+
+      <!-- 🔹 Top Image -->
+      <img
+        src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/081/397/original/rain_1.png?1720713939"
+        alt="Histogram Visualization"
+        class="example-image"
+      />
+
+      <!-- Example Input -->
+      <h2 class="blue-title">Example Input</h2>
+      <div class="example-box">
+Input 1:
+A = [0, 1, 0, 2]
+
+Input 2:
+A = [1, 2]
+      </div>
+
+      <!-- Example Output -->
+      <h2 class="blue-title">Example Output</h2>
+      <div class="example-box">
+Output 1:
+1
+
+Output 2:
+0
+      </div>
+
+      <!-- Example Explanation -->
+      <h2 class="blue-title">Example Explanation</h2>
+      <div class="example-box">
+Explanation 1:
+1 unit of water is trapped on top of the 3rd element.
+
+Explanation 2:
+No water is trapped.
+      </div>
+
+      <!-- 🔹 Bottom Image -->
+      <img
+        src="https://d2beiqkhq929f0.cloudfront.net/public_assets/assets/000/081/394/original/rain_water.png?1720713160"
+        alt="Trapped Water Visualization"
+        class="example-image"
+      />
+
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+public class Solution {
+    public int trap(final int[] A) {
+
+        int n = A.length;
+
+        int[] LM = new int[n + 1];
+        int[] RM = new int[n + 1];
+
+        // Compute left max
+        for (int i = 0; i < n; i++) {
+            LM[i + 1] = Math.max(LM[i], A[i]);
+        }
+
+        // Compute right max
+        for (int i = n - 1; i >= 0; i--) {
+            RM[i] = Math.max(RM[i + 1], A[i]);
+        }
+
+        int totalWater = 0;
+
+        // Calculate trapped water
+        for (int i = 0; i < n; i++) {
+            int waterLevel = Math.min(LM[i], RM[i]);
+            int trapped = waterLevel - A[i];
+
+            if (trapped > 0) {
+                totalWater += trapped;
+            }
+        }
+
+        return totalWater;
+    }
+}
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <button class="done">DONE ✅</button>
+</footer>
+
+<!-- Highlight.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+</body>
+</html>

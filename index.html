@@ -33,7 +33,10 @@
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" style="width: 0%; background: #4CAF50;"></div>
                 </div>
-                <p>🔥 14-Day Revision Streak | <span class = "flicker">📅 Exam in 28 Days</span></p>
+               <p>
+  🔥 14-Day Revision Streak Target |
+  <span class="flicker">📅 Exam in <span id="exam-days">--</span> Days</span>
+               </p>
             </div>
         </header>
        
@@ -95,5 +98,27 @@
 
     <script src="js-integration/dashboard.js"></script>
      <script src="QUIZ/toast.js"></script>
+
+     <script>
+        // ===== EXAM COUNTDOWN LOGIC =====
+        const examDate = new Date("2026-01-28");
+        const today = new Date();
+
+        today.setHours(0, 0, 0, 0);
+        examDate.setHours(0, 0, 0, 0);
+
+        const diffTime = examDate - today;
+        const daysLeft = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const examDaysSpan = document.getElementById("exam-days");
+
+        if (daysLeft > 0) {
+        examDaysSpan.textContent = daysLeft;
+        } else if (daysLeft === 0) {
+        examDaysSpan.textContent = "Today 🎯";
+        } else {
+        examDaysSpan.textContent = "Completed ✅";
+        }
+     </script>
 </body>
 </html>

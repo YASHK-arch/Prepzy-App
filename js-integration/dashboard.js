@@ -38,10 +38,10 @@ function updateGlobalDashboard() {
         const storedTotal = localStorage.getItem(`total_questions_${subject.id}`);
         const inheritedTotal = parseInt(storedTotal) || 0;
 
-        // >>> FIX START (REPLACED LOGIC)
+       
         const storedCompleted = localStorage.getItem(`completed_questions_${subject.id}`);
         const subjectCompleted = parseInt(storedCompleted) || 0;
-        // >>> FIX END
+       
 
         const subjectPercent = inheritedTotal > 0
             ? Math.round((subjectCompleted / inheritedTotal) * 100)

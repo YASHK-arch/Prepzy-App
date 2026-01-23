@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design Library Management System</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+
+  <!-- ✅ Extra Styling to Match Screenshot -->
+  <style>
+    .blue-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #1d4ed8;
+      margin-top: 25px;
+    }
+
+    .blue-subtitle {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1d4ed8;
+      margin-top: 15px;
+    }
+
+    .label-box {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      background: #f9fafb;
+      font-weight: 700;
+      color: #b91c1c;
+      margin: 2px;
+    }
+
+    .inline-code {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: #f3f4f6;
+      border: 1px solid #ddd;
+      font-family: monospace;
+      font-size: 14px;
+      color: #b91c1c;
+    }
+
+    .example-box {
+      background: #f9fafb;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 15px;
+      margin-top: 12px;
+      font-family: monospace;
+      font-size: 15px;
+      white-space: pre-line;
+    }
+
+    .output-box {
+      background: #eef2ff;
+      border-left: 5px solid #1d4ed8;
+      padding: 12px;
+      border-radius: 10px;
+      margin-top: 10px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h4>Q3 – Design Library Management System</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q3. Design Library Management System</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+
+      <h2>Problem Description</h2>
+      <p>
+        Design a <strong>Library Borrowing System</strong> where members borrow books,
+        librarians issue and return books, a book cannot be borrowed by multiple members
+        at the same time, premium members receive fine discounts and all outputs are stored
+        in a shared global log.
+      </p>
+
+      <!-- ================= CLASS DEFINITIONS ================= -->
+      <h2 class="blue-title">Class Definitions</h2>
+
+      <!-- Member -->
+      <h3>
+        1. Base Class:
+        <span class="label-box">Member</span>
+      </h3>
+
+      <ul>
+        <li><span class="label-box">name</span> : Member's name (<b>String</b>)</li>
+        <li><span class="label-box">memberId</span> : Member's ID (<b>String</b>)</li>
+        <li><span class="label-box">booksBorrowed</span> : Books borrowed (<b>int</b>)</li>
+        <li><span class="label-box">totalBorrows</span> : Global borrow count (<b>static int</b>)</li>
+        <li><span class="label-box">log</span> : Shared output log (<b>ArrayList&lt;String&gt;</b>)</li>
+      </ul>
+
+      <h4>Behavior:</h4>
+      <ul>
+        <li><span class="inline-code">borrowBook(librarian, days)</span></li>
+        <li><span class="inline-code">returnBook(librarian, lateDays)</span></li>
+        <li><span class="inline-code">applyFineDiscount(fine)</span></li>
+      </ul>
+
+      <!-- Premium Member -->
+      <h3>
+        2. Child Class:
+        <span class="label-box">PremiumMember</span>
+        (extends Member)
+      </h3>
+
+      <ul>
+        <li><span class="label-box">discountPercent</span> : Fine discount percentage</li>
+        <li>Overrides <span class="inline-code">applyFineDiscount()</span></li>
+      </ul>
+
+      <!-- Librarian -->
+      <h3>
+        3. Class:
+        <span class="label-box">Librarian</span>
+      </h3>
+
+      <ul>
+        <li><span class="label-box">name</span> : Librarian’s name (<b>String</b>)</li>
+        <li><span class="label-box">employeeId</span> : Unique employee ID</li>
+        <li><span class="label-box">booksHandled</span> : Total issue + return operations</li>
+        <li><span class="label-box">totalFineCollected</span> : Total fine collected</li>
+        <li><span class="label-box">bookCopy</span> : Nested BookCopy object</li>
+      </ul>
+
+      <!-- Nested BookCopy -->
+      <h3>
+        4. Nested Class:
+        <span class="label-box">BookCopy</span>
+        (inside Librarian)
+      </h3>
+
+      <ul>
+        <li><span class="label-box">title</span> : Book title</li>
+        <li><span class="label-box">finePerDay</span> : Fine per late day</li>
+        <li><span class="label-box">isIssued</span> : Book issued status</li>
+      </ul>
+
+      <!-- ================= EXAMPLE WALKTHROUGH ================= -->
+      <h2 class="blue-title">Example Walkthrough</h2>
+
+      <h3 class="blue-subtitle">Borrow Conflict Example</h3>
+
+      <div class="example-box">
+Member m1 = new Member("Amit", "M101");
+Member m2 = new Member("Neha", "M102");
+
+Librarian lib = new Librarian("Rohit", "L201", "JavaBook", 5);
+
+m1.borrowBook(lib, 7);
+m2.borrowBook(lib, 5);
+      </div>
+
+      <div class="output-box">
+Output (stored in log):<br>
+Book borrowed by Amit via Librarian Rohit<br>
+Librarian Rohit issued book to Amit for 7 days<br>
+Book already issued. Neha cannot borrow
+      </div>
+
+      <!-- ================= INSTRUCTIONS ================= -->
+      <h2 class="blue-title">Instructions</h2>
+      <ul>
+        <li>Implement <span class="label-box">Member</span>,
+            <span class="label-box">PremiumMember</span>,
+            <span class="label-box">Librarian</span>, and nested
+            <span class="label-box">BookCopy</span> exactly.</li>
+        <li>All output messages must be stored in <b>Member.log</b> only.</li>
+        <li>Do not print directly inside classes.</li>
+        <li>Fine is calculated only if <span class="inline-code">lateDays &gt; 0</span>.</li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+// 1. Base Class: Member
+class Member {
+    String name;
+    String memberId;
+    int booksBorrowed;
+
+    static int totalBorrows = 0;
+    static ArrayList<String> log = new ArrayList<>();
+
+    Member(String name, String memberId) {
+        this.name = name;
+        this.memberId = memberId;
+        this.booksBorrowed = 0;
+    }
+
+    void borrowBook(Librarian librarian, int days) {
+        if (librarian.bookCopy.isIssued) {
+            Member.log.add("Book already issued. " + this.name + " cannot borrow");
+            return;
+        } else {
+            booksBorrowed++;
+            Member.totalBorrows++;
+            Member.log.add("Book borrowed by " + this.name + " via Librarian " + librarian.name);
+            librarian.issueBook(this, days);
+        }
+    }
+
+    void returnBook(Librarian librarian, int lateDays) {
+        if (this.booksBorrowed == 0) return;
+        booksBorrowed--;
+        librarian.returnBook(this, lateDays);
+    }
+
+    double applyFineDiscount(double fine) {
+        return fine;
+    }
+}
+
+// 2. Child Class: PremiumMember
+class PremiumMember extends Member {
+    double discountPercent;
+
+    PremiumMember(String name, String memberId, double discountPercent) {
+        super(name, memberId);
+        this.discountPercent = discountPercent;
+    }
+
+    @Override
+    double applyFineDiscount(double fine) {
+        return fine - (fine * discountPercent / 100);
+    }
+}
+
+// 3. Class: Librarian
+class Librarian {
+    String name;
+    String employeeId;
+    int booksHandled;
+    double totalFineCollected;
+    BookCopy bookCopy;
+
+    Librarian(String name, String employeeId, String title, double finePerDay) {
+        this.name = name;
+        this.employeeId = employeeId;
+        this.booksHandled = 0;
+        this.totalFineCollected = 0;
+        this.bookCopy = new BookCopy(title, finePerDay);
+
+        Member.log.add("Librarian added: " + this.name + " | Book=" + title + " | FinePerDay=" + finePerDay);
+    }
+
+    void issueBook(Member member, int days) {
+        if (bookCopy.isIssued) {
+            Member.log.add("Book already issued. " + member.name + " cannot borrow");
+        } else {
+            bookCopy.isIssued = true;
+            booksHandled++;
+            Member.log.add("Librarian " + this.name + " issued book to " + member.name + " for " + days + " days");
+        }
+    }
+
+    void returnBook(Member member, int lateDays) {
+        double fine = bookCopy.calculateFine(lateDays);
+        double finalFine = member.applyFineDiscount(fine);
+        totalFineCollected += finalFine;
+        booksHandled++;
+        bookCopy.isIssued = false;
+        Member.log.add("Book returned by " + member.name + " | Fine: " + finalFine);
+    }
+
+    // 4. Nested Class: BookCopy
+    class BookCopy {
+        String title;
+        double finePerDay;
+        boolean isIssued;
+
+        BookCopy(String title, double finePerDay) {
+            this.title = title;
+            this.finePerDay = finePerDay;
+            this.isIssued = false;
+        }
+
+        double calculateFine(int lateDays) {
+            if (lateDays <= 0) return 0;
+            return lateDays * finePerDay;
+        }
+    }
+}
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q1.html"><button class="next">NEXT QUESTION ⏩</button></a>
+  <button class="done">DONE ✅</button>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inversion Count in an Array</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Q2 – Inversion Count in an Array</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q2. Inversion Count in an Array</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Given an array of integers <strong>A</strong>.
+        If <strong>i &lt; j</strong> and <strong>A[i] &gt; A[j]</strong>,
+        then the pair <strong>(i, j)</strong> is called an inversion of <strong>A</strong>.
+      </p>
+      <p>
+        Find the <strong>total number of inversions</strong> of <strong>A</strong>
+        modulo <strong>(10<sup>9</sup> + 7)</strong>.
+      </p>
+
+      <h2>Problem Constraints</h2>
+      <ul>
+        <li>1 ≤ length of the array ≤ 10<sup>5</sup></li>
+        <li>1 ≤ A[i] ≤ 10<sup>9</sup></li>
+      </ul>
+
+      <h2>Input Format</h2>
+      <div class="gray-box">
+        <p>The only argument given is the integer array <strong>A</strong>.</p>
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>
+          Return the number of inversions of <strong>A</strong>
+          modulo <strong>(10<sup>9</sup> + 7)</strong>.
+        </p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+A = [1, 3, 2]
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+1
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        The pair (1, 2) is an inversion since index 1 &lt; 2
+        and A[1] &gt; A[2].
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+import java.util.*;
+
+public class Solution {
+
+    public int solve(int[] A) {
+        long modulo = 1000000007L;
+        long result = countInversions(A, 0, A.length - 1) % modulo;
+        return (int) result;
+    }
+
+    // Recursively divide the array and count inversions
+    private long countInversions(int[] arr, int l, int r) {
+        long count = 0;
+
+        if (l < r) {
+            int m = (l + r) / 2;
+
+            // Count inversions in left half
+            count += countInversions(arr, l, m);
+
+            // Count inversions in right half
+            count += countInversions(arr, m + 1, r);
+
+            // Count cross inversions
+            count += mergeAndCount(arr, l, m, r);
+        }
+
+        return count;
+    }
+
+    // Merge two sorted halves and count inversions
+    private long mergeAndCount(int[] arr, int l, int m, int r) {
+
+        int[] left = Arrays.copyOfRange(arr, l, m + 1);
+        int[] right = Arrays.copyOfRange(arr, m + 1, r + 1);
+
+        int i = 0, j = 0, k = l;
+        long swaps = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i] <= right[j]) {
+                arr[k++] = left[i++];
+            } else {
+                arr[k++] = right[j++];
+                swaps += (left.length - i);
+            }
+        }
+
+        while (i < left.length) {
+            arr[k++] = left[i++];
+        }
+
+        while (j < right.length) {
+            arr[k++] = right[j++];
+        }
+
+        return swaps;
+    }
+}
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q3.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

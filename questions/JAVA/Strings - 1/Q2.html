@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Operations</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <h4>Q2 – String Operations</h4>
+</header>
+
+<div class="container">
+
+  <!-- ================= PROBLEM SECTION ================= -->
+  <div class="problem">
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q2. String Operations</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+      <h2>Problem Description</h2>
+      <p>
+        Akash likes playing with strings. One day he thought of applying the
+        following operations on the string in the given order:
+      </p>
+
+      <ul>
+        <li>Concatenate the string with itself.</li>
+        <li>Delete all the uppercase letters.</li>
+        <li>Replace each vowel with <strong>'#'</strong>.</li>
+      </ul>
+
+      <p>
+        You are given a string <strong>A</strong> of size <strong>N</strong>
+        consisting of lowercase and uppercase alphabets.
+        Return the resultant string after applying the above operations.
+      </p>
+
+      <p>
+        <strong>NOTE:</strong> 'a', 'e', 'i', 'o', 'u' are defined as vowels.
+      </p>
+
+      <h2>Problem Constraints</h2>
+      <ul>
+        <li>1 ≤ N ≤ 100000</li>
+      </ul>
+
+      <h2>Input Format</h2>
+      <div class="gray-box">
+        <p>The first argument is a string <strong>A</strong> of size N.</p>
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="gray-box">
+        <p>Return the resultant string.</p>
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+Input 1:
+A = "aeiOUz"
+
+Input 2:
+A = "AbcaZeoB"
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+Output 1:
+"###z###z"
+
+Output 2:
+"bc###bc###"
+      </div>
+
+      <h2>Example Explanation</h2>
+      <p>
+        First concatenate the string with itself, then remove uppercase letters,
+        and finally replace vowels with '#'.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= SOLUTION SECTION ================= -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+public class Solution {
+    public String solve(String A) {
+
+        // Step 1: Concatenate string with itself
+        StringBuilder str = new StringBuilder();
+        str.append(A);
+        str.append(A);
+
+        // Step 2: Delete all uppercase letters
+        for (int i = 0; i < str.length(); ) {
+            char ch = str.charAt(i);
+
+            if (Character.isUpperCase(ch)) {
+                str.deleteCharAt(i);
+            } else {
+                i++;
+            }
+        }
+
+        // Step 3: Replace vowels with '#'
+        for (int i = 0; i < str.length(); i++) {
+            char ch = str.charAt(i);
+
+            if (ch == 'a' || ch == 'e' || ch == 'i' ||
+                ch == 'o' || ch == 'u') {
+                str.setCharAt(i, '#');
+            }
+        }
+
+        return str.toString();
+    }
+}
+
+
+
+
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<footer>
+  <a href="Q1.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+  <button class="done">DONE ✅</button>
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>
