@@ -1,99 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inversion Count in an Array</title>
-
-  <!-- Main CSS -->
-  <link href="../../../styles/solution.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inversion Count in Array</title>
 
   <!-- Highlight.js -->
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/atom-one-dark.min.css" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Saira:wght@100&display=swap"
-    rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, sans-serif;
+    }
+
+    body {
+      background: #111;
+      color: white;
+    }
+
+    header {
+      padding: 20px;
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      background: #000;
+      border-bottom: 1px solid #333;
+    }
+
+    /* Two Panel Layout */
+    .container {
+      display: flex;
+      height: calc(100vh - 140px);
+    }
+
+    /* LEFT PANEL */
+    .problem {
+      width: 50%;
+      padding: 25px;
+      overflow-y: auto;
+      background: #0b0b0b;
+      border-right: 1px solid #333;
+    }
+
+    .problem h2 {
+      margin-top: 25px;
+      font-size: 20px;
+      color: #f3f4f6;
+    }
+
+    .problem p,
+    .problem li {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #d1d5db;
+      line-height: 1.6;
+    }
+
+    .gray-box {
+      margin-top: 10px;
+      background: #121212;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 10px;
+      color: #e5e7eb;
+    }
+
+    .code-box {
+      margin-top: 12px;
+      background: #101010;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 10px;
+      font-family: monospace;
+      color: #f9fafb;
+      white-space: pre-line;
+    }
+
+    /* RIGHT PANEL */
+    .solution {
+      width: 50%;
+      padding: 25px;
+      overflow-y: auto;
+      background: #ffffff;
+      color: black;
+    }
+
+    pre {
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #000;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+      border-top: 1px solid #333;
+    }
+
+    footer button {
+      padding: 10px 18px;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .next {
+      background: #2563eb;
+      color: white;
+    }
+
+    .done {
+      background: #16a34a;
+      color: white;
+    }
+
+    .done-status {
+      color: #facc15;
+      font-size: 15px;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h4>Q2 – Inversion Count in an Array</h4>
-</header>
+  <header>Q2. Inversion Count in an Array</header>
 
-<div class="container">
+  <div class="container">
 
-  <!-- ================= PROBLEM SECTION ================= -->
-  <div class="problem">
-    <div class="problem-top-nav">
-      <div class="top-nav-left">
-        <h3>Q2. Inversion Count in an Array</h3>
-        <span class="symbol">&lt;/&gt;</span>
-        <span class="badge-solved">
-          <i class="fa-solid fa-circle-check"></i> Solved
-        </span>
-      </div>
-      <i class="fa-solid fa-bookmark bookmark-icon"></i>
-    </div>
+    <!-- LEFT PANEL -->
+    <div class="problem">
 
-    <div class="problem-body">
       <h2>Problem Description</h2>
       <p>
-        Given an array of integers <strong>A</strong>.
-        If <strong>i &lt; j</strong> and <strong>A[i] &gt; A[j]</strong>,
-        then the pair <strong>(i, j)</strong> is called an inversion of <strong>A</strong>.
+        Given an array of integers <b>A</b>.  
+        If <b>i &lt; j</b> and <b>A[i] &gt; A[j]</b>, then the pair (i, j) is called an inversion of A.
       </p>
       <p>
-        Find the <strong>total number of inversions</strong> of <strong>A</strong>
-        modulo <strong>(10<sup>9</sup> + 7)</strong>.
+        Find the total number of inversions of A modulo <b>(10⁹ + 7)</b>.
       </p>
 
       <h2>Problem Constraints</h2>
-      <ul>
-        <li>1 ≤ length of the array ≤ 10<sup>5</sup></li>
-        <li>1 ≤ A[i] ≤ 10<sup>9</sup></li>
-      </ul>
+      <div class="gray-box">
+        1 ≤ length of the array ≤ 10⁵ <br />
+        1 ≤ A[i] ≤ 10⁹
+      </div>
 
       <h2>Input Format</h2>
       <div class="gray-box">
-        <p>The only argument given is the integer array <strong>A</strong>.</p>
+        The only argument given is the integer array A.
       </div>
 
       <h2>Output Format</h2>
       <div class="gray-box">
-        <p>
-          Return the number of inversions of <strong>A</strong>
-          modulo <strong>(10<sup>9</sup> + 7)</strong>.
-        </p>
+        Return the number of inversions of A modulo (10⁹ + 7).
       </div>
 
       <h2>Example Input</h2>
       <div class="code-box">
+Input 1:
 A = [1, 3, 2]
+
+Input 2:
+A = [3, 4, 1, 2]
       </div>
 
       <h2>Example Output</h2>
       <div class="code-box">
+Output 1:
 1
+
+Output 2:
+4
       </div>
 
       <h2>Example Explanation</h2>
-      <p>
-        The pair (1, 2) is an inversion since index 1 &lt; 2
-        and A[1] &gt; A[2].
-      </p>
-    </div>
-  </div>
 
-  <!-- ================= SOLUTION SECTION ================= -->
-  <div class="solution">
-    <pre>
-      <code class="language-java">
+      <p><b>Explanation 1:</b></p>
+      <div class="code-box">
+The pair (1, 2) is an inversion as 1 &lt; 2 and A[1] &gt; A[2]
+      </div>
+
+      <p><b>Explanation 2:</b></p>
+      <div class="code-box">
+The pair (0, 2) is an inversion as 0 &lt; 2 and A[0] &gt; A[2]
+The pair (0, 3) is an inversion as 0 &lt; 3 and A[0] &gt; A[3]
+The pair (1, 2) is an inversion as 1 &lt; 2 and A[1] &gt; A[2]
+The pair (1, 3) is an inversion as 1 &lt; 3 and A[1] &gt; A[3]
+      </div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="solution">
+      <pre>
+        <code class="language-java">
 import java.util.*;
 
 public class Solution {
@@ -104,27 +217,20 @@ public class Solution {
         return (int) result;
     }
 
-    // Recursively divide the array and count inversions
     private long countInversions(int[] arr, int l, int r) {
         long count = 0;
 
         if (l < r) {
             int m = (l + r) / 2;
 
-            // Count inversions in left half
             count += countInversions(arr, l, m);
-
-            // Count inversions in right half
             count += countInversions(arr, m + 1, r);
-
-            // Count cross inversions
             count += mergeAndCount(arr, l, m, r);
         }
 
         return count;
     }
 
-    // Merge two sorted halves and count inversions
     private long mergeAndCount(int[] arr, int l, int m, int r) {
 
         int[] left = Arrays.copyOfRange(arr, l, m + 1);
@@ -134,6 +240,7 @@ public class Solution {
         long swaps = 0;
 
         while (i < left.length && j < right.length) {
+
             if (left[i] <= right[j]) {
                 arr[k++] = left[i++];
             } else {
@@ -142,37 +249,37 @@ public class Solution {
             }
         }
 
-        while (i < left.length) {
-            arr[k++] = left[i++];
-        }
-
-        while (j < right.length) {
-            arr[k++] = right[j++];
-        }
+        while (i < left.length) arr[k++] = left[i++];
+        while (j < right.length) arr[k++] = right[j++];
 
         return swaps;
     }
 }
-      </code>
-    </pre>
+        </code>
+      </pre>
+    </div>
+
   </div>
 
-</div>
+  <!-- FOOTER EXACTLY LIKE YOUR OLD UI -->
+  <footer>
+    <a href="Q1.html">
+      <button class="next">NEXT QUESTION ⏩</button>
+    </a>
 
-<footer>
-  <a href="Q3.html">
-    <button class="next">NEXT QUESTION ⏩</button>
-  </a>
-  <button class="done">DONE ✅</button>
-  <div class="done-status">Revision Completed !!</div>
-</footer>
+    <button class="done">DONE ✅</button>
 
-<!-- Scripts -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-<script>
-  hljs.highlightAll();
-</script>
-<script src="../../../js-integration/storage.js" defer></script>
+    <div class="done-status">Revision Completed !!</div>
+  </footer>
+
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
+  <!-- Your Storage Integration -->
+  <script src="../../../js-integration/storage.js" defer></script>
 
 </body>
 </html>

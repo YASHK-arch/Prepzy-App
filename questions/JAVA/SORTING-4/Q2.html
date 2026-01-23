@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solution</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet" />
+
+  <!-- Highlight.js Theme -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@200..900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Dark Theme ONLY for Problem Panel -->
+  <style>
+    .problem {
+      background: #0b0b0b !important;
+      color: #e5e7eb !important;
+    }
+
+    .problem h2,
+    .problem h3 {
+      color: #ffffff !important;
+    }
+
+    .problem p,
+    .problem li {
+      color: #d1d5db !important;
+    }
+
+    .problem .gray-box,
+    .problem .code-box {
+      background: #111 !important;
+      border: 1px solid #333 !important;
+      color: #f9fafb !important;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .problem-top-nav {
+      border-bottom: 1px solid #333 !important;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h4>Sort by Number of Factors</h4>
+  </header>
+
+  <div class="container">
+
+    <!-- ================= LEFT PANEL (Problem) ================= -->
+    <div class="problem">
+      <div class="problem-top-nav">
+        <div class="top-nav-left">
+          <h3>Q2. Factors sort</h3>
+          <span class="symbol">&lt;/&gt;</span>
+          <span class="badge-solved">
+            ✔ Solved
+          </span>
+        </div>
+      </div>
+
+      <div class="problem-body">
+
+        <h2>Problem Description</h2>
+        <p>
+          You are given an array <strong>A</strong> of <strong>N</strong> elements.
+          Sort the given array in increasing order of number of distinct factors
+          of each element.
+        </p>
+
+        <p>
+          Element having the least number of factors should be the first to be displayed
+          and the number having highest number of factors should be the last one.
+        </p>
+
+        <p>
+          If 2 elements have same number of factors, then number with less value
+          should come first.
+        </p>
+
+        <p><strong>Note:</strong> You cannot use any extra space.</p>
+
+        <h2>Problem Constraints</h2>
+        <div class="gray-box">
+          <p>1 ≤ N ≤ 10<sup>4</sup></p>
+          <p>1 ≤ A[i] ≤ 10<sup>4</sup></p>
+        </div>
+
+        <h2>Input Format</h2>
+        <div class="gray-box">
+          First argument A is an array of integers.
+        </div>
+
+        <h2>Output Format</h2>
+        <div class="gray-box">
+          Return an array of integers.
+        </div>
+
+        <h2>Example Input</h2>
+        <div class="code-box">
+          Input 1:<br />
+          A = [6, 8, 9]<br /><br />
+          Input 2:<br />
+          A = [2, 4, 7]
+        </div>
+
+        <h2>Example Output</h2>
+        <div class="code-box">
+          Output 1:<br />
+          [9, 6, 8]<br /><br />
+          Output 2:<br />
+          [2, 7, 4]
+        </div>
+
+        <h2>Example Explanation</h2>
+
+        <p>For Input 1:</p>
+        <div class="code-box">
+          The number 9 has 3 factors, 6 has 4 factors and 8 has 4 factors.
+        </div>
+
+        <p>For Input 2:</p>
+        <div class="code-box">
+          The number 2 has 2 factors, 7 has 2 factors and 4 has 3 factors.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ================= RIGHT PANEL (Solution Code) ================= -->
+    <div class="solution">
+      <pre>
+        <code class="language-java">
+public class Solution {
+    public int[] solve(int[] A) {
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < A.length; i++) {
+            list.add(A[i]);
+        }
+
+        list.sort((x, y) -> {
+
+            int fx = countFactors(x);
+            int fy = countFactors(y);
+
+            if (fx != fy) return fx - fy;
+            else return x - y;
+        });
+
+        int[] arr = new int[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            arr[i] = list.get(i);
+        }
+
+        return arr;
+    }
+
+    private int countFactors(int n) {
+
+        int count = 0;
+
+        for (int i = 1; i * i <= n; i++) {
+
+            if (n % i == 0) {
+                count++;
+
+                if (i * i != n) count++;
+            }
+        }
+
+        return count;
+    }
+}
+        </code>
+      </pre>
+    </div>
+
+  </div>
+
+  <!-- ================= FOOTER (Same as Before) ================= -->
+  <footer>
+    <a href="Q1.html">
+      <button class="next">NEXT QUESTION ⏩</button>
+    </a>
+
+    <button class="done">DONE ✅</button>
+
+    <div class="done-status">Revision Completed !!</div>
+  </footer>
+
+  <!-- Highlight.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
+  <!-- Your Revision Storage Script -->
+  <script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

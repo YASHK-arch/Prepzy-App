@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solution</title>
+
+  <!-- Main CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet">
+
+  <!-- Highlight.js -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Dark Theme Only for Problem Panel -->
+  <style>
+    .problem {
+      background: #0b0b0b !important;
+      color: #e5e7eb !important;
+    }
+
+    .problem h2,
+    .problem h3 {
+      color: #ffffff !important;
+    }
+
+    .problem p,
+    .problem li {
+      color: #d1d5db !important;
+    }
+
+    .problem .gray-box,
+    .problem .code-box {
+      background: #111 !important;
+      border: 1px solid #333 !important;
+      color: #f9fafb !important;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h4>Sort Subarray with Left and Right Index</h4>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- LEFT PANEL (Problem) -->
+    <div class="problem">
+
+      <!-- TOP NAV -->
+      <div class="problem-top-nav">
+        <div class="top-nav-left">
+          <h3>Q3. Sort subarray with left and right index</h3>
+          <span class="symbol">&lt;/&gt;</span>
+          <span class="badge-solved">
+            ✔ Solved
+          </span>
+        </div>
+      </div>
+
+      <!-- PROBLEM BODY -->
+      <div class="problem-body">
+
+        <h2>Problem Description</h2>
+        <p>
+          You are given an array <strong>A</strong> of integers of length
+          <strong>N</strong> and two indices <strong>B</strong> and
+          <strong>C</strong>.
+        </p>
+
+        <p>
+          Your task is to sort the subarray <strong>[B, C]</strong> within the
+          given array. The rest of the array should remain unchanged.
+        </p>
+
+        <h2>Problem Constraints</h2>
+        <div class="gray-box">
+          <p>1 ≤ N ≤ 10<sup>5</sup></p>
+          <p>0 ≤ A[i] ≤ 10<sup>9</sup></p>
+          <p>0 ≤ B ≤ C ≤ N − 1</p>
+        </div>
+
+        <h2>Input Format</h2>
+        <div class="gray-box">
+          <p>
+            First argument is the array A of length N.
+            The next two arguments are the integers B and C.
+          </p>
+        </div>
+
+        <h2>Output Format</h2>
+        <div class="gray-box">
+          <p>
+            Return the array after sorting the [B, C] subarray.
+          </p>
+        </div>
+
+        <h2>Example Input</h2>
+        <div class="code-box">
+          Input 1:<br>
+          A = [59, 11, 8, 91, 49, 44, 8]<br>
+          B = 4<br>
+          C = 6<br><br>
+
+          Input 2:<br>
+          A = [50, 40, 30, 20, 10]<br>
+          B = 0<br>
+          C = 3
+        </div>
+
+        <h2>Example Output</h2>
+        <div class="code-box">
+          Output 1:<br>
+          [59, 11, 8, 91, 8, 44, 49]<br><br>
+
+          Output 2:<br>
+          [20, 30, 40, 50, 10]
+        </div>
+
+        <h2>Example Explanation</h2>
+
+        <p>Explanation 1:</p>
+        <div class="code-box">
+          Initially subarray A[4..6] = [49, 44, 8].<br>
+          After sorting → [8, 44, 49].<br>
+          Rest of array remains unchanged.
+        </div>
+
+        <p>Explanation 2:</p>
+        <div class="code-box">
+          Initially subarray A[0..3] = [50, 40, 30, 20].<br>
+          After sorting → [20, 30, 40, 50].<br>
+          Rest of array remains unchanged.
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT PANEL (Solution Code) -->
+    <div class="solution">
+      <pre>
+        <code class="language-java">
+public class Solution {
+
+    public int[] sortSubarray(int[] A, int B, int C) {
+
+        if (B >= C) return A;   // base case
+
+        int mid = (B + C) / 2;
+
+        sortSubarray(A, B, mid);
+        sortSubarray(A, mid + 1, C);
+
+        merge(A, B, mid, C);
+
+        return A;
+    }
+
+    private void merge(int[] A, int B, int mid, int C) {
+
+        int[] temp = new int[C - B + 1];
+
+        int i = B;
+        int j = mid + 1;
+        int k = 0;
+
+        while (i <= mid && j <= C) {
+            if (A[i] <= A[j]) {
+                temp[k++] = A[i++];
+            } else {
+                temp[k++] = A[j++];
+            }
+        }
+
+        while (i <= mid) {
+            temp[k++] = A[i++];
+        }
+
+        while (j <= C) {
+            temp[k++] = A[j++];
+        }
+
+        // copy back
+        for (int p = 0; p < temp.length; p++) {
+            A[B + p] = temp[p];
+        }
+    }
+}
+        </code>
+      </pre>
+    </div>
+
+  </div>
+
+  <!-- FOOTER (UNCHANGED SAME AS YOUR ORIGINAL) -->
+  <footer>
+    <a href="Q2.html">
+      <button class="next">NEXT QUESTION ⏩</button>
+    </a>
+
+    <button class="done">DONE ✅</button>
+
+    <div class="done-status">Revision Completed !!</div>
+  </footer>
+
+  <!-- Highlight.js Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+  <script>
+    hljs.highlightAll();
+  </script>
+
+  <!-- Storage Script -->
+  <script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>

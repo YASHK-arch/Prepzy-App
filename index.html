@@ -21,7 +21,7 @@
             <div class="dropdown-content">
                 <a href="subjects/java.html">DSA</a>
                 <a href="subjects/js.html">JS</a>
-                <a href="maths.html">Maths</a>
+                <a href="#" id="nav_development">Maths</a>
             </div>
         </div> 
     </div>
@@ -83,8 +83,8 @@
                     <span class="percentage-label">0%</span>
                 </div>
                 <div class="card-actions">
-                    <a href="maths.html" style="text-decoration: none;">
-                        <button class="under-development">Under Development</button>
+                    <a href="#" style="text-decoration: none;">
+                        <button class="under-development">No Content Available</button>
                     </a>
                 </div>
             </div>
@@ -101,7 +101,7 @@
 
      <script>
         // ===== EXAM COUNTDOWN LOGIC =====
-        const examDate = new Date("2026-01-28");
+        const examDate = new Date("2026-03-28");
         const today = new Date();
 
         today.setHours(0, 0, 0, 0);
@@ -119,6 +119,16 @@
         } else {
         examDaysSpan.textContent = "Completed ✅";
         }
+
+        let mthbtn = document.querySelector('.under-development');
+        let nav_mthbtn = document.querySelector('#nav_development');
+
+        mthbtn.addEventListener('click', function(){
+            alert('No problems available for now.....')
+        })
+        nav_mthbtn.addEventListener('click', function(){
+            alert('No problems available for now.....')
+        })
      </script>
 </body>
 </html>

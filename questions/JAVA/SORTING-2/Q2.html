@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Q2 Merge Sort</title>
+
+  <!-- External CSS -->
+  <link href="../../../styles/solution.css" rel="stylesheet" />
+
+  <!-- Highlight.js Theme -->
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/codepen-embed.min.css">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/your-kit-id.js" crossorigin="anonymous"></script>
+
+  <style>
+    /* DARK THEME ONLY FOR PROBLEM PANEL */
+    .problem {
+      background: #0d0f10;
+      color: #dcdcdc;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.6);
+    }
+
+    .problem h2 {
+      color: #ffffff;
+      margin-top: 30px;
+      font-size: 22px;
+    }
+
+    .gray-box {
+      background: #141718;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 10px 0;
+      color: #dcdcdc;
+    }
+
+    .code-box {
+      background: #111;
+      border: 1px solid #333;
+      padding: 15px;
+      border-radius: 8px;
+      font-family: monospace;
+      color: #e6e6e6;
+      margin-top: 10px;
+      white-space: pre-line;
+    }
+
+    .problem-top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .top-nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .badge-solved {
+      background: #0f2f1c;
+      color: #38d26d;
+      padding: 5px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .symbol {
+      color: #aaa;
+    }
+
+    .bookmark-icon {
+      color: gold;
+      font-size: 18px;
+    }
+
+    /* Keep two-panel structure */
+    .container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .solution {
+      flex: 1;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .problem {
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h4>Merge Sort</h4>
+</header>
+
+<div class="container">
+
+  <!-- LEFT PANEL (Problem Statement Dark Theme) -->
+  <div class="problem">
+
+    <div class="problem-top-nav">
+      <div class="top-nav-left">
+        <h3>Q2. Merge Sort</h3>
+        <span class="symbol">&lt;/&gt;</span>
+        <span class="badge-solved">
+          <i class="fa-solid fa-circle-check"></i> Solved
+        </span>
+      </div>
+      <i class="fa-solid fa-bookmark bookmark-icon"></i>
+    </div>
+
+    <div class="problem-body">
+
+      <h2>Problem Description</h2>
+      <div class="code-box">
+        Given an integer array A, sort the array using Merge Sort.
+      </div>
+
+      <h2>Problem Constraints</h2>
+      <div class="gray-box">
+        1 ≤ |A| ≤ 10⁵ <br>
+        1 ≤ A[i] ≤ 10⁹
+      </div>
+
+      <h2>Input Format</h2>
+      <div class="code-box">
+        First argument is an integer array A.
+      </div>
+
+      <h2>Output Format</h2>
+      <div class="code-box">
+        Return the sorted array.
+      </div>
+
+      <h2>Example Input</h2>
+      <div class="code-box">
+        Input 1: <br>
+        A = [1, 4, 10, 2, 1, 5] <br><br>
+
+        Input 2: <br>
+        A = [3, 7, 1]
+      </div>
+
+      <h2>Example Output</h2>
+      <div class="code-box">
+        Output 1: <br>
+        [1, 1, 2, 4, 5, 10] <br><br>
+
+        Output 2: <br>
+        [1, 3, 7]
+      </div>
+
+      <h2>Example Explanation</h2>
+      <div class="code-box">
+        Explanation 1 and 2: <br>
+        Return the sorted array.
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RIGHT PANEL (Solution Code Same Style) -->
+  <div class="solution">
+    <pre>
+      <code class="language-java">
+public class Solution {
+    public int[] solve(int[] A) {
+        int n = A.length;
+        sort(A, 0, n - 1);
+        return A;
+    }
+
+    private void sort(int[] A, int l, int r) {
+        if (l >= r) return;
+
+        int mid = (l + r) / 2;
+
+        sort(A, l, mid);
+        sort(A, mid + 1, r);
+
+        merge(A, l, mid, r);
+    }
+
+    private void merge(int[] A, int l, int mid, int r) {
+        int[] ans = new int[r - l + 1];
+
+        int i = l;
+        int j = mid + 1;
+        int k = 0;
+
+        while (i <= mid && j <= r) {
+            if (A[i] < A[j]) {
+                ans[k++] = A[i++];
+            } else {
+                ans[k++] = A[j++];
+            }
+        }
+
+        while (i <= mid) {
+            ans[k++] = A[i++];
+        }
+
+        while (j <= r) {
+            ans[k++] = A[j++];
+        }
+
+        for (int p = 0; p < ans.length; p++) {
+            A[l + p] = ans[p];
+        }
+    }
+}
+      </code>
+    </pre>
+  </div>
+
+</div>
+
+<!-- FOOTER SAME AS BEFORE -->
+<footer>
+  <a href="Q1.html">
+    <button class="next">NEXT QUESTION ⏩</button>
+  </a>
+
+  <button class="done">DONE ✅</button>
+
+  <div class="done-status">Revision Completed !!</div>
+</footer>
+
+<!-- Highlight.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script>
+  hljs.highlightAll();
+</script>
+
+<!-- Same Storage Script -->
+<script src="../../../js-integration/storage.js" defer></script>
+
+</body>
+</html>
